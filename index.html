@@ -643,10 +643,16 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
   height: 20px;
   fill: var(--gold);
 }
-.music-btn.playing .music-icon-play { display: none; }
-.music-btn.playing .music-icon-pause { display: block; }
-.music-btn:not(.playing) .music-icon-play { display: block; }
-.music-btn:not(.playing) .music-icon-pause { display: none; }
+.music-btn .music-slash {
+  display: block;
+  transition: opacity .3s;
+}
+.music-btn.playing .music-slash {
+  opacity: 0;
+}
+.music-btn:not(.playing) .music-slash {
+  opacity: 1;
+}
 .music-disc {
   position: absolute;
   inset: -4px;
@@ -922,11 +928,13 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
 </main>
 
 <!-- Music -->
-<audio id="bg-music" src="music.mp3" loop preload="auto"></audio>
+<audio id="bg-music" src="Love%20Story.mp3" loop preload="auto"></audio>
 <button class="music-btn" id="music-btn" aria-label="Bật/Tắt nhạc">
   <span class="music-disc"></span>
-  <svg class="music-icon-play" viewBox="0 0 24 24"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6ZM10 19a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z"/></svg>
-  <svg class="music-icon-pause" viewBox="0 0 24 24"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6ZM10 19a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z"/><line x1="2" y1="2" x2="22" y2="22" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/></svg>
+  <svg viewBox="0 0 24 24">
+    <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6ZM10 19a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z"/>
+    <line class="music-slash" x1="3" y1="3" x2="21" y2="21" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round"/>
+  </svg>
 </button>
 
 <script>
