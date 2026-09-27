@@ -983,6 +983,7 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
   var musicBtn = document.getElementById('music-btn');
 
   document.getElementById('open-btn').addEventListener('click', function () {
+    window.scrollTo(0, 0);
     cover.classList.add('opened');
     invitation.classList.add('visible');
     document.body.style.overflow = '';
