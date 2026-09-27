@@ -1,0 +1,936 @@
+<title>Minh Đức & Thanh Hương</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap">
+
+<style>
+:root {
+  --bg: #FAF6F0;
+  --bg-alt: #F3EDE4;
+  --gold: #B08D57;
+  --gold-light: #D4BC8A;
+  --gold-subtle: rgba(176,141,87,0.12);
+  --rose: #C4918D;
+  --rose-light: rgba(196,145,141,0.15);
+  --text: #2C1810;
+  --text-muted: #7A6B5E;
+  --divider: #D4C8BA;
+  --card: rgba(255,255,255,0.5);
+  --cover-bg: #2C1810;
+  --cover-text: #F3EDE4;
+}
+
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#191513;--bg-alt:#231E18;--gold:#D4BC8A;--gold-light:#E8D4A0;
+    --gold-subtle:rgba(212,188,138,0.1);--rose:#D4A5A0;--rose-light:rgba(212,165,160,0.12);
+    --text:#EDE5D8;--text-muted:#A09080;--divider:#3A3228;--card:rgba(35,30,24,0.7);
+    --cover-bg:#0F0D0B;--cover-text:#EDE5D8;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#191513;--bg-alt:#231E18;--gold:#D4BC8A;--gold-light:#E8D4A0;
+  --gold-subtle:rgba(212,188,138,0.1);--rose:#D4A5A0;--rose-light:rgba(212,165,160,0.12);
+  --text:#EDE5D8;--text-muted:#A09080;--divider:#3A3228;--card:rgba(35,30,24,0.7);
+  --cover-bg:#0F0D0B;--cover-text:#EDE5D8;
+  color-scheme:dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.8;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* ───── Cover ───── */
+#cover {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--cover-bg);
+  color: var(--cover-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  transition: transform 1s cubic-bezier(.4,0,.2,1), opacity .7s ease .4s;
+  cursor: default;
+}
+#cover.opened {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+.cover-ornament {
+  width: 80px;
+  height: 80px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse-ring 2.5s ease-in-out infinite;
+}
+.cover-ornament span {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: var(--gold);
+  font-style: italic;
+}
+.cover-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin: 0;
+}
+.cover-names {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(36px, 8vw, 56px);
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.3;
+  color: var(--gold-light);
+}
+.cover-names .amp {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.5em;
+  display: block;
+  margin-block: -0.2em;
+  color: var(--rose);
+}
+.cover-date {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  margin: 0;
+}
+.cover-btn {
+  margin-top: 1rem;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  letter-spacing: 3px;
+  padding: 12px 40px;
+  cursor: pointer;
+  transition: background .3s, color .3s;
+}
+.cover-btn:hover, .cover-btn:focus-visible {
+  background: var(--gold);
+  color: var(--cover-bg);
+  outline: none;
+}
+
+/* ───── Main ───── */
+#invitation {
+  max-width: 720px;
+  margin-inline: auto;
+  padding-inline: 24px;
+  padding-block: 0 3rem;
+  opacity: 0;
+  transition: opacity .6s ease .8s;
+}
+#invitation.visible { opacity: 1; }
+
+/* ───── Sections ───── */
+section {
+  padding-block: 3rem;
+}
+
+/* ───── Divider ornament ───── */
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-block: 2rem;
+}
+.ornament::before, .ornament::after {
+  content: '';
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  opacity: .5;
+}
+.ornament i {
+  width: 7px;
+  height: 7px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  display: block;
+  flex-shrink: 0;
+}
+
+/* ───── Hero ───── */
+.hero {
+  padding-block: 5rem 3rem;
+}
+.hero-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 1.5rem;
+}
+.hero-names {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(40px, 10vw, 68px);
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.2;
+  color: var(--text);
+}
+.hero-names .amp {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: .4em;
+  display: block;
+  margin-block: .1em;
+  color: var(--rose);
+}
+.hero-date {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  margin: 1.5rem 0 0;
+}
+
+/* ───── Greeting ───── */
+.greeting { text-align: center; }
+.greeting p { margin: 0; font-size: 20px; color: var(--text-muted); }
+.greeting .guest-name {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(32px, 7vw, 48px);
+  color: var(--gold);
+  margin: .5rem 0;
+  line-height: 1.3;
+}
+.greeting .invite-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--text);
+  margin-top: .5rem;
+}
+
+/* ───── Couple ───── */
+.couple-grid {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+.couple-card { flex: 1 1 220px; max-width: 280px; text-align: center; }
+.photo-frame {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  margin: 0 auto 1rem;
+  overflow: hidden;
+  background: var(--bg-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.photo-frame span {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+.couple-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 .3rem;
+}
+.couple-card p {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+.couple-heart {
+  flex: 0 0 auto;
+  align-self: center;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  margin-top: 1rem;
+}
+.couple-heart::before, .couple-heart::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 32px;
+  background: var(--rose);
+  border-radius: 20px 20px 0 0;
+}
+.couple-heart::before { left: 20px; transform: rotate(-45deg); transform-origin: 0 100%; }
+.couple-heart::after { left: 0; transform: rotate(45deg); transform-origin: 100% 100%; }
+@media(max-width:560px) {
+  .couple-heart { margin-block: -.5rem; transform: scale(.7); }
+}
+
+/* ───── Events ───── */
+.events h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 2rem;
+  text-align: center;
+}
+.event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.event-item {
+  background: var(--card);
+  border: 1px solid var(--divider);
+  padding: 1.5rem 2rem;
+  text-align: center;
+  transition: transform .3s, box-shadow .3s;
+}
+.event-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px var(--gold-subtle);
+}
+.event-item h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 .6rem;
+  color: var(--gold);
+}
+.event-item .ev-time {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin: 0 0 .3rem;
+  letter-spacing: 1px;
+}
+.event-item .ev-venue {
+  font-size: 17px;
+  font-weight: 500;
+  margin: 0;
+}
+.event-item .ev-address {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: .2rem 0 0;
+}
+
+/* ───── Countdown ───── */
+.countdown-section {
+  background: var(--bg-alt);
+  margin-inline: -24px;
+  padding-inline: 24px;
+  padding-block: 3rem;
+  text-align: center;
+}
+.countdown-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 2rem;
+}
+.countdown-grid {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1rem, 4vw, 2.5rem);
+}
+.cd-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .3rem;
+}
+.cd-num {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 8vw, 52px);
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  min-width: 2ch;
+}
+.cd-label {
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ───── Story Timeline ───── */
+.story h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 2.5rem;
+  text-align: center;
+}
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--gold);
+  opacity: .4;
+}
+.tl-item {
+  position: relative;
+  padding-bottom: 2rem;
+  padding-left: 1.5rem;
+}
+.tl-item:last-child { padding-bottom: 0; }
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -2rem;
+  top: 8px;
+  width: 11px;
+  height: 11px;
+  background: var(--bg);
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+}
+.tl-year {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  margin: 0 0 .3rem;
+}
+.tl-item h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 .3rem;
+}
+.tl-item p {
+  font-size: 16px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ───── Gallery ───── */
+.gallery h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 2rem;
+  text-align: center;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+.gallery-cell {
+  aspect-ratio: 1;
+  background: var(--bg-alt);
+  border: 1px solid var(--divider);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: transform .3s;
+}
+.gallery-cell:hover { transform: scale(1.03); }
+.gallery-cell span {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ───── Wishes ───── */
+.wishes { text-align: center; }
+.wishes h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 .5rem;
+}
+.wishes > p { color: var(--text-muted); margin: 0 0 2rem; }
+#wish-form {
+  max-width: 480px;
+  margin: 0 auto 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
+}
+#wish-form input,
+#wish-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  padding: 12px 16px;
+  border: 1px solid var(--divider);
+  background: var(--card);
+  color: var(--text);
+  outline: none;
+  transition: border-color .3s;
+}
+#wish-form input:focus,
+#wish-form textarea:focus {
+  border-color: var(--gold);
+}
+#wish-form textarea { resize: vertical; min-height: 100px; }
+#wish-form button {
+  align-self: center;
+  background: var(--gold);
+  color: #fff;
+  border: none;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  padding: 12px 36px;
+  cursor: pointer;
+  transition: opacity .3s;
+}
+#wish-form button:hover { opacity: .85; }
+.wishes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
+}
+.wish-card {
+  background: var(--card);
+  border: 1px solid var(--divider);
+  padding: 1.2rem 1.5rem;
+}
+.wish-card .wc-name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--gold);
+  margin: 0 0 .3rem;
+}
+.wish-card .wc-msg {
+  font-size: 16px;
+  color: var(--text);
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.wish-card .wc-time {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: .5rem 0 0;
+}
+
+/* ───── Footer ───── */
+footer {
+  text-align: center;
+  padding-block: 2rem 4rem;
+}
+footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
+.footer-names {
+  font-family: 'Great Vibes', cursive;
+  font-size: 36px !important;
+  color: var(--gold) !important;
+  margin-top: 1rem !important;
+}
+.footer-tag {
+  font-size: 13px !important;
+  letter-spacing: 2px;
+  margin-top: .5rem !important;
+}
+
+/* ───── Floating petals ───── */
+.petal {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  will-change: transform;
+}
+.petal i {
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: var(--rose);
+  border-radius: 50% 0 50% 50%;
+  opacity: .35;
+}
+@keyframes petal-fall {
+  0%   { transform: translateY(-20px) rotate(0deg);   opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg);  opacity: 0; }
+}
+
+/* ───── Scroll reveal ───── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.shown {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ───── Keyframes ───── */
+@keyframes pulse-ring {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.06); opacity: .7; }
+}
+
+/* ───── Reduced motion ───── */
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  #cover { transition: opacity .3s; }
+  #cover.opened { transform: none; }
+}
+
+/* ───── Responsive ───── */
+@media(max-width: 480px) {
+  body { font-size: 16px; }
+  section { padding-block: 2rem; }
+  .hero { padding-block: 3rem 2rem; }
+  .event-item { padding: 1.2rem; }
+  .timeline { padding-left: 1.5rem; }
+  .tl-item { padding-left: 1rem; }
+  .tl-item::before { left: -1.5rem; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+
+<!-- ═══════ Cover ═══════ -->
+<div id="cover">
+  <div class="cover-ornament"><span>W</span></div>
+  <p class="cover-label">Thiệp Mời</p>
+  <h1 class="cover-names">
+    Minh Đức
+    <span class="amp">&</span>
+    Thanh Hương
+  </h1>
+  <p class="cover-date">28 . 12 . 2026</p>
+  <button class="cover-btn" id="open-btn">Mở Thiệp</button>
+</div>
+
+<!-- ═══════ Petals container ═══════ -->
+<div id="petals" aria-hidden="true"></div>
+
+<!-- ═══════ Invitation ═══════ -->
+<main id="invitation">
+
+  <!-- Hero -->
+  <section class="hero reveal">
+    <p class="hero-label">Save the Date</p>
+    <h1 class="hero-names">
+      Minh Đức
+      <span class="amp">&</span>
+      Thanh Hương
+    </h1>
+    <p class="hero-date">28 . 12 . 2026</p>
+  </section>
+
+  <div class="ornament" aria-hidden="true"><i></i></div>
+
+  <!-- Greeting -->
+  <section class="greeting reveal">
+    <p>Trân trọng kính mời</p>
+    <h2 class="guest-name" id="guest-name">Quý Khách</h2>
+    <p class="invite-text">đến dự lễ thành hôn của chúng tôi</p>
+  </section>
+
+  <div class="ornament" aria-hidden="true"><i></i></div>
+
+  <!-- Couple -->
+  <section class="reveal">
+    <div class="couple-grid">
+      <div class="couple-card">
+        <div class="photo-frame"><span>Ảnh<br>Chú Rể</span></div>
+        <h3>Nguyễn Minh Đức</h3>
+        <p>Con trai<br>Ông Nguyễn Văn A &amp; Bà Trần Thị B</p>
+      </div>
+      <div class="couple-heart" aria-hidden="true"></div>
+      <div class="couple-card">
+        <div class="photo-frame"><span>Ảnh<br>Cô Dâu</span></div>
+        <h3>Lê Thanh Hương</h3>
+        <p>Con gái<br>Ông Lê Văn C &amp; Bà Phạm Thị D</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament" aria-hidden="true"><i></i></div>
+
+  <!-- Events -->
+  <section class="events reveal">
+    <h2>Lễ Cưới</h2>
+    <div class="event-list">
+      <div class="event-item">
+        <h3>Lễ Vu Quy</h3>
+        <p class="ev-time">9:00 &middot; Chủ Nhật, 28/12/2026</p>
+        <p class="ev-venue">Tư gia nhà gái</p>
+        <p class="ev-address">123 Đường ABC, Quận 1, TP. Hồ Chí Minh</p>
+      </div>
+      <div class="event-item">
+        <h3>Lễ Thành Hôn</h3>
+        <p class="ev-time">11:00 &middot; Chủ Nhật, 28/12/2026</p>
+        <p class="ev-venue">Tư gia nhà trai</p>
+        <p class="ev-address">456 Đường DEF, Quận 3, TP. Hồ Chí Minh</p>
+      </div>
+      <div class="event-item">
+        <h3>Tiệc Cưới</h3>
+        <p class="ev-time">18:00 &middot; Chủ Nhật, 28/12/2026</p>
+        <p class="ev-venue">Trung tâm Tiệc cưới Grand Palace</p>
+        <p class="ev-address">789 Đường GHI, Quận 7, TP. Hồ Chí Minh</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Countdown -->
+  <section class="countdown-section reveal">
+    <h2>Đếm Ngược</h2>
+    <div class="countdown-grid">
+      <div class="cd-item"><span class="cd-num" id="cd-d">--</span><span class="cd-label">Ngày</span></div>
+      <div class="cd-item"><span class="cd-num" id="cd-h">--</span><span class="cd-label">Giờ</span></div>
+      <div class="cd-item"><span class="cd-num" id="cd-m">--</span><span class="cd-label">Phút</span></div>
+      <div class="cd-item"><span class="cd-num" id="cd-s">--</span><span class="cd-label">Giây</span></div>
+    </div>
+  </section>
+
+  <div class="ornament" aria-hidden="true"><i></i></div>
+
+  <!-- Love Story -->
+  <section class="story">
+    <h2 class="reveal">Chuyện Tình Yêu</h2>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <p class="tl-year">2020</p>
+        <h3>Lần Đầu Gặp Gỡ</h3>
+        <p>Chúng tôi tình cờ gặp nhau tại quán cà phê nhỏ giữa lòng thành phố. Một ánh nhìn, một nụ cười, và câu chuyện bắt đầu từ đó.</p>
+      </div>
+      <div class="tl-item reveal">
+        <p class="tl-year">2021</p>
+        <h3>Chính Thức Hẹn Hò</h3>
+        <p>Sau bao lần gặp gỡ, chúng tôi nhận ra rằng mình không thể thiếu nhau. Mùa xuân năm ấy, chúng tôi chính thức bên nhau.</p>
+      </div>
+      <div class="tl-item reveal">
+        <p class="tl-year">2024</p>
+        <h3>Cùng Nhau Xây Dựng</h3>
+        <p>Những chuyến đi, những kỷ niệm, những thử thách vượt qua cùng nhau đã làm tình yêu chúng tôi thêm bền chặt.</p>
+      </div>
+      <div class="tl-item reveal">
+        <p class="tl-year">2026</p>
+        <h3>Lời Cầu Hôn</h3>
+        <p>Vào một buổi tối đặc biệt, anh đã quỳ gối và nói: "Em có muốn cùng anh đi hết cuộc đời này không?"</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament" aria-hidden="true"><i></i></div>
+
+  <!-- Gallery -->
+  <section class="gallery reveal">
+    <h2>Album Ảnh</h2>
+    <div class="gallery-grid">
+      <div class="gallery-cell"><span>Ảnh 1</span></div>
+      <div class="gallery-cell"><span>Ảnh 2</span></div>
+      <div class="gallery-cell"><span>Ảnh 3</span></div>
+      <div class="gallery-cell"><span>Ảnh 4</span></div>
+      <div class="gallery-cell"><span>Ảnh 5</span></div>
+      <div class="gallery-cell"><span>Ảnh 6</span></div>
+    </div>
+  </section>
+
+  <div class="ornament" aria-hidden="true"><i></i></div>
+
+  <!-- Wishes -->
+  <section class="wishes reveal">
+    <h2>Sổ Lưu Bút</h2>
+    <p>Hãy để lại lời chúc tốt đẹp cho chúng tôi nhé</p>
+    <form id="wish-form">
+      <input type="text" id="w-name" placeholder="Tên của bạn" required maxlength="60">
+      <textarea id="w-msg" placeholder="Lời chúc của bạn..." required maxlength="500"></textarea>
+      <button type="submit">Gửi Lời Chúc</button>
+    </form>
+    <div class="wishes-grid" id="wishes-list"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="ornament" aria-hidden="true"><i></i></div>
+    <p>Sự hiện diện của quý khách là niềm vinh hạnh cho gia đình chúng tôi</p>
+    <p class="footer-names">Minh Đức & Thanh Hương</p>
+    <p class="footer-tag">#MinhDucThanhHuong2026</p>
+  </footer>
+
+</main>
+
+<script>
+(function () {
+  /* ── Wedding date (change this) ── */
+  var WEDDING = new Date('2026-12-28T10:00:00');
+
+  /* ── Guest name from URL ── */
+  var params = new URLSearchParams(location.search);
+  var guest = params.get('to');
+  if (!guest && location.hash.length > 1) {
+    guest = decodeURIComponent(location.hash.slice(1)).replace(/[-_]/g, ' ');
+  }
+  if (guest) {
+    document.getElementById('guest-name').textContent = guest;
+  }
+
+  /* ── Cover open ── */
+  var cover = document.getElementById('cover');
+  var invitation = document.getElementById('invitation');
+  document.getElementById('open-btn').addEventListener('click', function () {
+    cover.classList.add('opened');
+    invitation.classList.add('visible');
+    document.body.style.overflow = '';
+    startPetals();
+  });
+  document.body.style.overflow = 'hidden';
+
+  /* ── Scroll reveal ── */
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('shown');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(function (el) { obs.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('shown'); });
+  }
+
+  /* ── Countdown ── */
+  var dEl = document.getElementById('cd-d');
+  var hEl = document.getElementById('cd-h');
+  var mEl = document.getElementById('cd-m');
+  var sEl = document.getElementById('cd-s');
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function tick() {
+    var diff = WEDDING - Date.now();
+    if (diff <= 0) {
+      dEl.textContent = '00'; hEl.textContent = '00';
+      mEl.textContent = '00'; sEl.textContent = '00';
+      return;
+    }
+    var s = Math.floor(diff / 1000);
+    var m = Math.floor(s / 60); s %= 60;
+    var h = Math.floor(m / 60); m %= 60;
+    var d = Math.floor(h / 24); h %= 24;
+    dEl.textContent = pad(d);
+    hEl.textContent = pad(h);
+    mEl.textContent = pad(m);
+    sEl.textContent = pad(s);
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ── Petals ── */
+  function startPetals() {
+    var container = document.getElementById('petals');
+    var count = window.innerWidth < 500 ? 10 : 18;
+    for (var j = 0; j < count; j++) {
+      var p = document.createElement('div');
+      p.className = 'petal';
+      p.innerHTML = '<i></i>';
+      var dur = 8 + Math.random() * 14;
+      var delay = Math.random() * 12;
+      var left = Math.random() * 100;
+      var size = 0.5 + Math.random() * 0.8;
+      p.style.left = left + '%';
+      p.style.top = '-20px';
+      p.querySelector('i').style.transform = 'scale(' + size + ')';
+      p.style.animation = 'petal-fall ' + dur + 's linear ' + delay + 's infinite';
+      container.appendChild(p);
+    }
+  }
+
+  /* ── Wishes (localStorage demo) ── */
+  var STORAGE_KEY = 'wedding_wishes';
+
+  function loadWishes() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    } catch (e) { return []; }
+  }
+
+  function saveWish(w) {
+    var list = loadWishes();
+    list.unshift(w);
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); } catch (e) {}
+  }
+
+  function renderWishes() {
+    var list = loadWishes();
+    var container = document.getElementById('wishes-list');
+    container.innerHTML = '';
+    list.forEach(function (w) {
+      var card = document.createElement('div');
+      card.className = 'wish-card';
+      var name = document.createElement('p');
+      name.className = 'wc-name';
+      name.textContent = w.name;
+      var msg = document.createElement('p');
+      msg.className = 'wc-msg';
+      msg.textContent = w.message;
+      var time = document.createElement('p');
+      time.className = 'wc-time';
+      time.textContent = w.time;
+      card.appendChild(name);
+      card.appendChild(msg);
+      card.appendChild(time);
+      container.appendChild(card);
+    });
+  }
+
+  document.getElementById('wish-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var nameEl = document.getElementById('w-name');
+    var msgEl = document.getElementById('w-msg');
+    var n = nameEl.value.trim();
+    var m = msgEl.value.trim();
+    if (!n || !m) return;
+    saveWish({
+      name: n,
+      message: m,
+      time: new Date().toLocaleDateString('vi-VN', { day: 'numeric', month: 'long', year: 'numeric' })
+    });
+    nameEl.value = '';
+    msgEl.value = '';
+    renderWishes();
+  });
+
+  renderWishes();
+})();
+</script>
