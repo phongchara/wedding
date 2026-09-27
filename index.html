@@ -174,6 +174,7 @@ section {
 /* ───── Hero ───── */
 .hero {
   padding-block: 5rem 3rem;
+  text-align: center;
 }
 .hero-label {
   font-family: 'Cormorant Garamond', serif;
@@ -183,6 +184,38 @@ section {
   color: var(--gold);
   margin: 0 0 1.5rem;
 }
+.hero-frame {
+  position: relative;
+  display: inline-block;
+  padding: 2.5rem 3rem;
+  margin-block: .5rem;
+}
+.hero-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--gold);
+  opacity: .35;
+}
+.hero-frame::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--gold);
+  opacity: .2;
+}
+.hero-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--gold);
+  border-style: solid;
+  opacity: .6;
+}
+.hero-corner:nth-child(1) { top: -4px; left: -4px; border-width: 2px 0 0 2px; }
+.hero-corner:nth-child(2) { top: -4px; right: -4px; border-width: 2px 2px 0 0; }
+.hero-corner:nth-child(3) { bottom: -4px; left: -4px; border-width: 0 0 2px 2px; }
+.hero-corner:nth-child(4) { bottom: -4px; right: -4px; border-width: 0 2px 2px 0; }
 .hero-names {
   font-family: 'Great Vibes', cursive;
   font-size: clamp(40px, 10vw, 68px);
@@ -196,8 +229,25 @@ section {
   font-style: italic;
   font-size: .4em;
   display: block;
-  margin-block: .1em;
+  margin-block: .15em;
   color: var(--rose);
+}
+.hero-sub {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: .8rem;
+  color: var(--gold);
+  opacity: .5;
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+.hero-sub::before, .hero-sub::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
 }
 .hero-date {
   font-family: 'Playfair Display', serif;
@@ -664,12 +714,19 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
   <!-- Hero -->
   <section class="hero reveal">
     <p class="hero-label">Save the Date</p>
-    <h1 class="hero-names">
-      Đức Phong
-      <span class="amp">&</span>
-      Quỳnh Anh
-    </h1>
-    <p class="hero-date">13 - 14 . 11 . 2026</p>
+    <div class="hero-frame">
+      <span class="hero-corner"></span>
+      <span class="hero-corner"></span>
+      <span class="hero-corner"></span>
+      <span class="hero-corner"></span>
+      <h1 class="hero-names">
+        Quỳnh Anh
+        <span class="amp">&</span>
+        Đức Phong
+      </h1>
+      <div class="hero-sub" aria-hidden="true">We're getting married</div>
+    </div>
+    <p class="hero-date">13 . 11 &mdash; 14 . 11 . 2026</p>
   </section>
 
   <div class="ornament" aria-hidden="true"><i></i></div>
