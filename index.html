@@ -609,6 +609,59 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
   margin-top: .5rem !important;
 }
 
+/* ───── Music button ───── */
+.music-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 50;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  background: var(--bg);
+  color: var(--gold);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px var(--gold-subtle);
+  transition: transform .3s, box-shadow .3s;
+  opacity: 0;
+  pointer-events: none;
+}
+.music-btn.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.music-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px var(--gold-subtle);
+}
+.music-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--gold);
+}
+.music-btn.playing .music-icon-play { display: none; }
+.music-btn.playing .music-icon-pause { display: block; }
+.music-btn:not(.playing) .music-icon-play { display: block; }
+.music-btn:not(.playing) .music-icon-pause { display: none; }
+.music-disc {
+  position: absolute;
+  inset: -4px;
+  border: 1.5px dashed var(--gold);
+  border-radius: 50%;
+  opacity: .4;
+  animation: spin-disc 4s linear infinite paused;
+}
+.music-btn.playing .music-disc {
+  animation-play-state: running;
+}
+@keyframes spin-disc {
+  to { transform: rotate(360deg); }
+}
+
 /* ───── Floating petals ───── */
 .petal {
   position: fixed;
@@ -868,6 +921,14 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
 
 </main>
 
+<!-- Music -->
+<audio id="bg-music" src="music.mp3" loop preload="auto"></audio>
+<button class="music-btn" id="music-btn" aria-label="Bật/Tắt nhạc">
+  <span class="music-disc"></span>
+  <svg class="music-icon-play" viewBox="0 0 24 24"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6ZM10 19a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z"/></svg>
+  <svg class="music-icon-pause" viewBox="0 0 24 24"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6ZM10 19a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z"/><line x1="2" y1="2" x2="22" y2="22" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/></svg>
+</button>
+
 <script>
 (function () {
   /* ── Wedding date (change this) ── */
@@ -886,11 +947,29 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
   /* ── Cover open ── */
   var cover = document.getElementById('cover');
   var invitation = document.getElementById('invitation');
+  var bgMusic = document.getElementById('bg-music');
+  var musicBtn = document.getElementById('music-btn');
+
   document.getElementById('open-btn').addEventListener('click', function () {
     cover.classList.add('opened');
     invitation.classList.add('visible');
     document.body.style.overflow = '';
     startPetals();
+    bgMusic.play().then(function () {
+      musicBtn.classList.add('playing', 'active');
+    }).catch(function () {
+      musicBtn.classList.add('active');
+    });
+  });
+
+  musicBtn.addEventListener('click', function () {
+    if (bgMusic.paused) {
+      bgMusic.play();
+      musicBtn.classList.add('playing');
+    } else {
+      bgMusic.pause();
+      musicBtn.classList.remove('playing');
+    }
   });
   document.body.style.overflow = 'hidden';
 
