@@ -569,11 +569,30 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
 }
 .petal i {
   display: block;
-  width: 10px;
+  width: 12px;
+  height: 11px;
+  position: relative;
+  opacity: .35;
+}
+.petal i::before,
+.petal i::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 6px;
   height: 10px;
   background: var(--rose);
-  border-radius: 50% 0 50% 50%;
-  opacity: .35;
+  border-radius: 6px 6px 0 0;
+}
+.petal i::before {
+  left: 6px;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+.petal i::after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
 }
 @keyframes petal-fall {
   0%   { transform: translateY(-20px) rotate(0deg);   opacity: 0; }
