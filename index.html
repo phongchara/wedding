@@ -284,12 +284,11 @@ section {
 .couple-grid {
   display: flex;
   gap: 2rem;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
   margin-top: 2rem;
 }
-.couple-card { flex: 1 1 220px; max-width: 280px; text-align: center; }
+.couple-card { flex: 0 1 240px; text-align: center; }
 .photo-frame {
   width: 160px;
   height: 160px;
@@ -338,6 +337,8 @@ section {
 .couple-heart::before { left: 20px; transform: rotate(-45deg); transform-origin: 0 100%; }
 .couple-heart::after { left: 0; transform: rotate(45deg); transform-origin: 100% 100%; }
 @media(max-width:560px) {
+  .couple-grid { flex-direction: column; align-items: center; gap: 1rem; }
+  .couple-card { flex: none; width: 100%; max-width: 280px; }
   .couple-heart { margin-block: -.5rem; transform: scale(.7); }
 }
 
