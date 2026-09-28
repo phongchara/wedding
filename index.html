@@ -633,11 +633,12 @@ section {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height .5s ease, opacity .4s ease;
+  transition: max-height .8s ease, opacity .7s ease;
 }
 .wish-slider-wrap.open {
   max-height: 600px;
   opacity: 1;
+  transition: max-height .8s ease, opacity .6s ease .15s;
 }
 .wish-carousel {
   position: relative;
@@ -655,7 +656,7 @@ section {
   text-align: left;
   opacity: 0;
   transform: scale(.92);
-  transition: opacity .5s ease, transform .5s ease;
+  transition: opacity .9s ease, transform .9s ease;
   pointer-events: none;
 }
 .wish-slide.active {
@@ -666,11 +667,13 @@ section {
 }
 .wish-slide.exit-left {
   opacity: 0;
-  transform: translateX(-30px) scale(.92);
+  transform: translateX(-20px) scale(.95);
+  transition: opacity .7s ease, transform .7s ease;
 }
 .wish-slide.exit-right {
   opacity: 0;
-  transform: translateX(30px) scale(.92);
+  transform: translateX(20px) scale(.95);
+  transition: opacity .7s ease, transform .7s ease;
 }
 .wish-slide .ws-name {
   font-family: 'Playfair Display', serif;
@@ -1147,6 +1150,41 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
     }).catch(function () {
       musicBtn.classList.add('active');
     });
+    setTimeout(startAutoScroll, 4500);
+    fetchWishes(true);
+  });
+
+  /* ── Auto-scroll ── */
+  var autoScrollId = null;
+  var autoScrollSpeed = 0.5;
+  var pauseTimer = null;
+
+  function startAutoScroll() {
+    if (autoScrollId) return;
+    autoScrollId = requestAnimationFrame(autoScrollStep);
+  }
+
+  function stopAutoScroll() {
+    if (autoScrollId) { cancelAnimationFrame(autoScrollId); autoScrollId = null; }
+  }
+
+  function autoScrollStep() {
+    var maxY = document.documentElement.scrollHeight - window.innerHeight;
+    if (window.scrollY >= maxY) { autoScrollId = null; return; }
+    window.scrollBy(0, autoScrollSpeed);
+    autoScrollId = requestAnimationFrame(autoScrollStep);
+  }
+
+  function pauseAndResume() {
+    stopAutoScroll();
+    clearTimeout(pauseTimer);
+    pauseTimer = setTimeout(startAutoScroll, 4500);
+  }
+
+  window.addEventListener('wheel', pauseAndResume, { passive: true });
+  window.addEventListener('touchstart', pauseAndResume, { passive: true });
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === ' ') pauseAndResume();
   });
 
   musicBtn.addEventListener('click', function () {
@@ -1293,9 +1331,11 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
     wishes.forEach(function (w, i) {
       var slide = document.createElement('div');
       slide.className = 'wish-slide' + (i === 0 ? ' active' : '');
+      var words = w.message.split(/\s+/);
+      var preview = words.length > 4 ? words.slice(0, 4).join(' ') + '...' : w.message;
       slide.innerHTML =
         '<p class="ws-name">' + escHtml(w.name) + '</p>' +
-        '<p class="ws-msg">' + escHtml(w.message) + '</p>' +
+        '<p class="ws-msg">' + escHtml(preview) + '</p>' +
         '<p class="ws-time">' + escHtml(w.time) + '</p>';
       carousel.appendChild(slide);
       wishSlides.push(slide);
@@ -1329,17 +1369,43 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
     }, { passive: true });
   })();
 
-  function fetchWishes() {
-    carousel.innerHTML = '<p class="wish-loading">Đang tải lời chúc...</p>';
-    navWrap.style.display = 'none';
+  var WISH_CACHE_KEY = 'wedding_wishes_cache';
+
+  function getCachedWishes() {
+    try {
+      var raw = sessionStorage.getItem(WISH_CACHE_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (e) {}
+    return null;
+  }
+
+  function setCachedWishes(wishes) {
+    try { sessionStorage.setItem(WISH_CACHE_KEY, JSON.stringify(wishes)); } catch (e) {}
+  }
+
+  function fetchWishes(silent) {
+    if (!silent) {
+      var cached = getCachedWishes();
+      if (cached) {
+        wishesLoaded = true;
+        renderSlides(cached);
+      } else {
+        carousel.innerHTML = '<p class="wish-loading">Đang tải lời chúc...</p>';
+        navWrap.style.display = 'none';
+      }
+    }
     fetch(SCRIPT_URL + '?action=get')
       .then(function (r) { return r.json(); })
       .then(function (data) {
+        var wishes = data.wishes || [];
+        setCachedWishes(wishes);
         wishesLoaded = true;
-        renderSlides(data.wishes || []);
+        renderSlides(wishes);
       })
       .catch(function () {
-        carousel.innerHTML = '<p class="wish-empty">Không tải được lời chúc.</p>';
+        if (!wishesLoaded) {
+          carousel.innerHTML = '<p class="wish-empty">Không tải được lời chúc.</p>';
+        }
       });
   }
 
@@ -1349,7 +1415,14 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
     toggleBtn.innerHTML = isOpen
       ? 'Ẩn lời chúc <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>'
       : 'Xem lời chúc từ mọi người <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>';
-    if (isOpen && !wishesLoaded) fetchWishes();
+    if (isOpen) {
+      if (wishesLoaded) {
+        var cached = getCachedWishes();
+        if (cached) renderSlides(cached);
+      } else {
+        fetchWishes(false);
+      }
+    }
   });
 
   document.getElementById('wish-form').addEventListener('submit', function (e) {
@@ -1381,7 +1454,8 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
       msgEl.value = '';
       showStatus('Cảm ơn bạn đã gửi lời chúc! 💕', 'success');
       wishesLoaded = false;
-      if (sliderWrap.classList.contains('open')) fetchWishes();
+      try { sessionStorage.removeItem(WISH_CACHE_KEY); } catch (e) {}
+      if (sliderWrap.classList.contains('open')) fetchWishes(false);
     }).catch(function () {
       showStatus('Không gửi được, vui lòng thử lại sau.', 'error');
     }).finally(function () {
