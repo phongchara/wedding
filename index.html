@@ -584,9 +584,9 @@ section {
 }
 .wish-status.success {
   display: block;
-  background: rgba(76,175,80,.12);
-  color: #2e7d32;
-  border: 1px solid rgba(76,175,80,.3);
+  background: rgba(184,148,86,.1);
+  color: var(--gold);
+  border: 1px solid rgba(184,148,86,.25);
 }
 .wish-status.error {
   display: block;
@@ -1301,11 +1301,14 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
 
   function buildDots() {
     dotsWrap.innerHTML = '';
-    wishSlides.forEach(function (_, i) {
+    var total = wishSlides.length;
+    var maxDots = Math.min(total, 4);
+    for (var i = 0; i < maxDots; i++) {
       var dot = document.createElement('span');
-      dot.className = 'wish-dot' + (i === wishIdx ? ' active' : '');
+      var activeDot = total <= 4 ? wishIdx : Math.round(wishIdx / (total - 1) * (maxDots - 1));
+      dot.className = 'wish-dot' + (i === activeDot ? ' active' : '');
       dotsWrap.appendChild(dot);
-    });
+    }
   }
 
   function goTo(idx, dir) {
@@ -1452,7 +1455,7 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
       markSent();
       nameEl.value = '';
       msgEl.value = '';
-      showStatus('Cảm ơn bạn đã gửi lời chúc! 💕', 'success');
+      showStatus('Cảm ơn bạn đã gửi lời chúc! ♡', 'success');
       wishesLoaded = false;
       try { sessionStorage.removeItem(WISH_CACHE_KEY); } catch (e) {}
       if (sliderWrap.classList.contains('open')) fetchWishes(false);
