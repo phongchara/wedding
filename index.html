@@ -572,35 +572,179 @@ section {
   transition: opacity .3s;
 }
 #wish-form button:hover { opacity: .85; }
-.wishes-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  text-align: left;
+.wish-hp { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; }
+.wish-status {
+  text-align: center;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 4px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  display: none;
 }
-.wish-card {
+.wish-status.success {
+  display: block;
+  background: rgba(76,175,80,.12);
+  color: #2e7d32;
+  border: 1px solid rgba(76,175,80,.3);
+}
+.wish-status.error {
+  display: block;
+  background: rgba(244,67,54,.12);
+  color: #c62828;
+  border: 1px solid rgba(244,67,54,.3);
+}
+#wish-form button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+.wish-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 1.2rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  letter-spacing: .5px;
+  padding: 0;
+  cursor: pointer;
+  transition: color .3s;
+}
+.wish-toggle:hover {
+  color: var(--gold);
+}
+.wish-toggle svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  transition: transform .3s;
+}
+.wish-toggle.open svg {
+  transform: rotate(180deg);
+}
+.wish-slider-wrap {
+  margin-top: 1.5rem;
+  position: relative;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height .5s ease, opacity .4s ease;
+}
+.wish-slider-wrap.open {
+  max-height: 600px;
+  opacity: 1;
+}
+.wish-carousel {
+  position: relative;
+  max-width: 400px;
+  margin: 0 auto;
+  min-height: 120px;
+  touch-action: pan-y;
+}
+.wish-slide {
+  position: absolute;
+  inset: 0;
   background: var(--card);
   border: 1px solid var(--divider);
-  padding: 1.2rem 1.5rem;
+  padding: 1.8rem 1.5rem;
+  text-align: left;
+  opacity: 0;
+  transform: scale(.92);
+  transition: opacity .5s ease, transform .5s ease;
+  pointer-events: none;
 }
-.wish-card .wc-name {
+.wish-slide.active {
+  position: relative;
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+.wish-slide.exit-left {
+  opacity: 0;
+  transform: translateX(-30px) scale(.92);
+}
+.wish-slide.exit-right {
+  opacity: 0;
+  transform: translateX(30px) scale(.92);
+}
+.wish-slide .ws-name {
   font-family: 'Playfair Display', serif;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 17px;
   color: var(--gold);
-  margin: 0 0 .3rem;
+  margin: 0 0 .5rem;
 }
-.wish-card .wc-msg {
-  font-size: 16px;
+.wish-slide .ws-msg {
+  font-size: 15px;
+  line-height: 1.6;
   color: var(--text);
-  margin: 0;
+  margin: 0 0 .8rem;
   white-space: pre-wrap;
   word-break: break-word;
 }
-.wish-card .wc-time {
+.wish-slide .ws-time {
   font-size: 12px;
   color: var(--text-muted);
-  margin: .5rem 0 0;
+  margin: 0;
+}
+.wish-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.2rem;
+}
+.wish-nav-btn {
+  background: none;
+  border: 1px solid var(--divider);
+  color: var(--gold);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .3s, border-color .3s;
+}
+.wish-nav-btn:hover {
+  background: var(--gold);
+  color: #fff;
+  border-color: var(--gold);
+}
+.wish-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.wish-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--divider);
+  transition: background .3s, transform .3s;
+}
+.wish-dot.active {
+  background: var(--gold);
+  transform: scale(1.3);
+}
+.wish-counter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.wish-loading, .wish-empty {
+  color: var(--text-muted);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  padding: 2rem 0;
+  text-align: center;
 }
 
 /* ───── Footer ───── */
@@ -862,7 +1006,7 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
         <h3>Tiệc Cưới</h3>
         <p class="ev-time">Thứ Bảy, 14/11/2026</p>
         <p class="ev-venue">Sân Đa Năng</p>
-        <p class="ev-address">Quỳnh Anh, Quỳnh Lưu, Nghệ An</p>
+        <p class="ev-address">Quỳnh Anh, Nghệ An</p>
       </div>
     </div>
   </section>
@@ -936,9 +1080,19 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
     <form id="wish-form">
       <input type="text" id="w-name" placeholder="Tên của bạn" required maxlength="60">
       <textarea id="w-msg" placeholder="Lời chúc của bạn..." required maxlength="500"></textarea>
-      <button type="submit">Gửi Lời Chúc</button>
+      <input type="text" id="w-hp" class="wish-hp" tabindex="-1" autocomplete="off">
+      <button type="submit" id="wish-btn">Gửi Lời Chúc</button>
     </form>
-    <div class="wishes-grid" id="wishes-list"></div>
+    <div id="wish-status" class="wish-status"></div>
+    <button class="wish-toggle" id="wish-toggle">Xem lời chúc từ mọi người <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="wish-slider-wrap" id="wish-slider-wrap">
+      <div class="wish-carousel" id="wish-carousel"></div>
+      <div class="wish-nav" id="wish-nav" style="display:none">
+        <button class="wish-nav-btn" id="wish-prev">&#8249;</button>
+        <div class="wish-dots" id="wish-dots"></div>
+        <button class="wish-nav-btn" id="wish-next">&#8250;</button>
+      </div>
+    </div>
   </section>
 
   <!-- Footer -->
@@ -1069,62 +1223,172 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
     }
   }
 
-  /* ── Wishes (localStorage demo) ── */
-  var STORAGE_KEY = 'wedding_wishes';
+  /* ── Wishes (Google Sheets backend) ── */
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyqE36MzH0D-mS3KXVEbE8uMEal3eWKiBht4ZcXgDliY1g9L-E7DKKXrNrq9qAQR4s9lQ/exec';
+  var RATE_KEY = 'wedding_wish_ts';
+  var RATE_LIMIT_MS = 60000;
 
-  function loadWishes() {
+  function isRateLimited() {
     try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-    } catch (e) { return []; }
+      var last = parseInt(localStorage.getItem(RATE_KEY), 10);
+      if (last && Date.now() - last < RATE_LIMIT_MS) return true;
+    } catch (e) {}
+    return false;
   }
 
-  function saveWish(w) {
-    var list = loadWishes();
-    list.unshift(w);
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); } catch (e) {}
+  function markSent() {
+    try { localStorage.setItem(RATE_KEY, String(Date.now())); } catch (e) {}
   }
 
-  function renderWishes() {
-    var list = loadWishes();
-    var container = document.getElementById('wishes-list');
-    container.innerHTML = '';
-    list.forEach(function (w) {
-      var card = document.createElement('div');
-      card.className = 'wish-card';
-      var name = document.createElement('p');
-      name.className = 'wc-name';
-      name.textContent = w.name;
-      var msg = document.createElement('p');
-      msg.className = 'wc-msg';
-      msg.textContent = w.message;
-      var time = document.createElement('p');
-      time.className = 'wc-time';
-      time.textContent = w.time;
-      card.appendChild(name);
-      card.appendChild(msg);
-      card.appendChild(time);
-      container.appendChild(card);
+  function showStatus(msg, type) {
+    var el = document.getElementById('wish-status');
+    el.textContent = msg;
+    el.className = 'wish-status ' + type;
+  }
+
+  var wishesLoaded = false;
+  var wishIdx = 0;
+  var wishSlides = [];
+  var toggleBtn = document.getElementById('wish-toggle');
+  var sliderWrap = document.getElementById('wish-slider-wrap');
+  var carousel = document.getElementById('wish-carousel');
+  var navWrap = document.getElementById('wish-nav');
+  var dotsWrap = document.getElementById('wish-dots');
+
+  function escHtml(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  function buildDots() {
+    dotsWrap.innerHTML = '';
+    wishSlides.forEach(function (_, i) {
+      var dot = document.createElement('span');
+      dot.className = 'wish-dot' + (i === wishIdx ? ' active' : '');
+      dotsWrap.appendChild(dot);
     });
   }
+
+  function goTo(idx, dir) {
+    if (idx < 0 || idx >= wishSlides.length || idx === wishIdx) return;
+    var old = wishSlides[wishIdx];
+    old.classList.remove('active');
+    old.classList.add(dir === 'left' ? 'exit-left' : 'exit-right');
+    setTimeout(function () { old.classList.remove('exit-left', 'exit-right'); }, 500);
+    wishIdx = idx;
+    wishSlides[wishIdx].classList.add('active');
+    buildDots();
+  }
+
+  function renderSlides(wishes) {
+    carousel.innerHTML = '';
+    wishSlides = [];
+    wishIdx = 0;
+    if (!wishes.length) {
+      carousel.innerHTML = '<p class="wish-empty">Chưa có lời chúc nào.</p>';
+      navWrap.style.display = 'none';
+      return;
+    }
+    wishes.forEach(function (w, i) {
+      var slide = document.createElement('div');
+      slide.className = 'wish-slide' + (i === 0 ? ' active' : '');
+      slide.innerHTML =
+        '<p class="ws-name">' + escHtml(w.name) + '</p>' +
+        '<p class="ws-msg">' + escHtml(w.message) + '</p>' +
+        '<p class="ws-time">' + escHtml(w.time) + '</p>';
+      carousel.appendChild(slide);
+      wishSlides.push(slide);
+    });
+    navWrap.style.display = wishes.length > 1 ? 'flex' : 'none';
+    buildDots();
+  }
+
+  document.getElementById('wish-prev').addEventListener('click', function () {
+    goTo(wishIdx <= 0 ? wishSlides.length - 1 : wishIdx - 1, 'right');
+  });
+  document.getElementById('wish-next').addEventListener('click', function () {
+    goTo(wishIdx >= wishSlides.length - 1 ? 0 : wishIdx + 1, 'left');
+  });
+
+  (function () {
+    var startX = 0, startY = 0, dragging = false;
+    carousel.addEventListener('touchstart', function (e) {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      dragging = true;
+    }, { passive: true });
+    carousel.addEventListener('touchend', function (e) {
+      if (!dragging) return;
+      dragging = false;
+      var dx = e.changedTouches[0].clientX - startX;
+      var dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) < 40 || Math.abs(dy) > Math.abs(dx)) return;
+      if (dx < 0) goTo(wishIdx >= wishSlides.length - 1 ? 0 : wishIdx + 1, 'left');
+      else goTo(wishIdx <= 0 ? wishSlides.length - 1 : wishIdx - 1, 'right');
+    }, { passive: true });
+  })();
+
+  function fetchWishes() {
+    carousel.innerHTML = '<p class="wish-loading">Đang tải lời chúc...</p>';
+    navWrap.style.display = 'none';
+    fetch(SCRIPT_URL + '?action=get')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        wishesLoaded = true;
+        renderSlides(data.wishes || []);
+      })
+      .catch(function () {
+        carousel.innerHTML = '<p class="wish-empty">Không tải được lời chúc.</p>';
+      });
+  }
+
+  toggleBtn.addEventListener('click', function () {
+    var isOpen = sliderWrap.classList.toggle('open');
+    toggleBtn.classList.toggle('open', isOpen);
+    toggleBtn.innerHTML = isOpen
+      ? 'Ẩn lời chúc <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>'
+      : 'Xem lời chúc từ mọi người <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>';
+    if (isOpen && !wishesLoaded) fetchWishes();
+  });
 
   document.getElementById('wish-form').addEventListener('submit', function (e) {
     e.preventDefault();
+    if (document.getElementById('w-hp').value) return;
+    if (isRateLimited()) {
+      showStatus('Bạn vừa gửi lời chúc rồi, vui lòng đợi một chút nhé!', 'error');
+      return;
+    }
     var nameEl = document.getElementById('w-name');
     var msgEl = document.getElementById('w-msg');
+    var btn = document.getElementById('wish-btn');
     var n = nameEl.value.trim();
     var m = msgEl.value.trim();
     if (!n || !m) return;
-    saveWish({
-      name: n,
-      message: m,
-      time: new Date().toLocaleDateString('vi-VN', { day: 'numeric', month: 'long', year: 'numeric' })
-    });
-    nameEl.value = '';
-    msgEl.value = '';
-    renderWishes();
-  });
 
-  renderWishes();
+    btn.disabled = true;
+    btn.textContent = 'Đang gửi...';
+    showStatus('', '');
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: n, message: m })
+    }).then(function () {
+      markSent();
+      nameEl.value = '';
+      msgEl.value = '';
+      showStatus('Cảm ơn bạn đã gửi lời chúc! 💕', 'success');
+      wishesLoaded = false;
+      if (sliderWrap.classList.contains('open')) fetchWishes();
+    }).catch(function () {
+      showStatus('Không gửi được, vui lòng thử lại sau.', 'error');
+    }).finally(function () {
+      btn.disabled = false;
+      btn.textContent = 'Gửi Lời Chúc';
+    });
+  });
 })();
 </script>
 </body>
