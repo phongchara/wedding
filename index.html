@@ -3,32 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Đức Phong & Quỳnh Anh</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap">
+<title>Quỳnh Anh & Đức Phong</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Great+Vibes&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap">
 
 <style>
 :root {
-  --bg: #191513;
-  --bg-alt: #231E18;
+  --bg: #3B0A0A;
+  --bg-alt: #4A1515;
+  --bg-paper: #F5EDE0;
   --gold: #D4BC8A;
   --gold-light: #E8D4A0;
   --gold-subtle: rgba(212,188,138,0.1);
   --rose: #D4A5A0;
   --rose-light: rgba(212,165,160,0.12);
   --text: #EDE5D8;
-  --text-muted: #A09080;
-  --divider: #3A3228;
-  --card: rgba(35,30,24,0.7);
-  --cover-bg: #0A0806;
+  --text-muted: #B8A898;
+  --text-dark: #3A2218;
+  --text-dark-muted: #7A6A5E;
+  --divider: #5A2020;
+  --divider-paper: rgba(212,188,138,0.35);
+  --card: rgba(74,21,21,0.5);
+  --cover-bg: #200606;
   --cover-text: #EDE5D8;
   color-scheme: dark;
 }
 
 body {
   background-color: var(--bg);
-  background-image: url("paper-texture.png");
-  background-size: 256px 256px;
-  background-blend-mode: overlay;
+  background-image: url("bg-burgundy.jpeg");
+  background-size: 100% auto;
+  background-repeat: repeat-y;
+  background-position: top center;
   color: var(--text);
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: 18px;
@@ -43,10 +48,10 @@ body {
   position: fixed;
   inset: 0;
   z-index: 100;
-  background-color: var(--bg);
-  background-image: url("paper-texture.png");
-  background-size: 256px 256px;
-  background-blend-mode: overlay;
+  background-color: var(--cover-bg);
+  background-image: url("bg-burgundy.jpeg");
+  background-size: cover;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -86,14 +91,14 @@ body {
   width: 100%;
   height: 100%;
   border: 1px solid rgba(184,148,86,.25);
-  background: #2A1E16;
+  background: #3A1212;
   transform: translateZ(calc(var(--depth) / 2));
 }
 .env-back {
   width: 100%;
   height: 100%;
   border: 1px solid rgba(184,148,86,.15);
-  background: #241A12;
+  background: #321010;
   transform: rotateY(180deg) translateZ(calc(var(--depth) / 2));
 }
 .env-right {
@@ -101,7 +106,7 @@ body {
   height: 100%;
   right: 0;
   top: 0;
-  background: linear-gradient(to right, #2E2018, #281C12);
+  background: linear-gradient(to right, #3E1515, #361212);
   border-block: 1px solid rgba(184,148,86,.15);
   transform-origin: right center;
   transform: rotateY(90deg) translateZ(0px);
@@ -111,7 +116,7 @@ body {
   height: var(--depth);
   bottom: 0;
   left: 0;
-  background: linear-gradient(to bottom, #2C1E16, #261A10);
+  background: linear-gradient(to bottom, #3C1414, #341010);
   border-inline: 1px solid rgba(184,148,86,.15);
   transform-origin: center bottom;
   transform: rotateX(-90deg) translateZ(0px);
@@ -136,7 +141,7 @@ body {
   width: 100%;
   height: 100%;
   clip-path: polygon(0 0, 100% 0, 50% 100%);
-  background: linear-gradient(170deg, #4A3628, #3E2C1E);
+  background: linear-gradient(170deg, #5A2828, #4E2020);
   filter: drop-shadow(0 0 .5px rgba(184,148,86,.3));
   backface-visibility: hidden;
 }
@@ -145,7 +150,7 @@ body {
   width: 100%;
   height: 100%;
   clip-path: polygon(0 0, 100% 0, 50% 100%);
-  background: linear-gradient(170deg, #42301E, #3A2818);
+  background: linear-gradient(170deg, #522222, #4A1E1E);
   backface-visibility: hidden;
   transform: rotateY(180deg);
 }
@@ -159,7 +164,7 @@ body {
   height: 66px;
   border: 1px solid var(--gold);
   border-radius: 50%;
-  background: #2A1E16;
+  background: #3A1212;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -234,7 +239,7 @@ body {
   max-width: 720px;
   margin-inline: auto;
   padding-inline: 24px;
-  padding-block: 0 3rem;
+  padding-block: 0 0;
   opacity: 0;
   transform: scale(.97);
   transition: opacity .8s ease 1.5s, transform .8s ease 1.5s;
@@ -243,7 +248,19 @@ body {
 
 /* ───── Sections ───── */
 section {
-  padding-block: 2rem;
+  padding-block: 2.5rem;
+}
+
+/* ───── Paper section (cream bg) ───── */
+.paper-section {
+  position: relative;
+  margin-inline: -24px;
+  padding-inline: 24px;
+  background-color: var(--bg-paper);
+  background-image: url("bg-embossed.jpeg");
+  background-size: cover;
+  background-position: center;
+  color: var(--text-dark);
 }
 
 /* ───── Divider ornament ───── */
@@ -252,255 +269,343 @@ section {
   align-items: center;
   justify-content: center;
   gap: 14px;
-  margin-block: 1rem;
+  padding-block: .5rem;
 }
 .ornament::before, .ornament::after {
   content: '';
-  width: 60px;
+  width: 50px;
   height: 1px;
   background: var(--gold);
-  opacity: .5;
+  opacity: .35;
 }
 .ornament i {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   background: var(--gold);
+  opacity: .5;
   transform: rotate(45deg);
   display: block;
   flex-shrink: 0;
 }
+.paper-section .ornament::before,
+.paper-section .ornament::after {
+  opacity: .5;
+}
+.paper-section .ornament i {
+  opacity: .7;
+}
+
+/* ───── Decorative elements ───── */
+.corner-decor {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  color: var(--gold);
+  pointer-events: none;
+  z-index: 0;
+  opacity: .12;
+}
+.corner-decor.tl { top: 10px; left: 10px; }
+.corner-decor.br { bottom: 10px; right: 10px; transform: rotate(180deg); }
+.corner-decor.tr { top: 10px; right: 10px; transform: scaleX(-1); }
+.corner-decor.bl { bottom: 10px; left: 10px; transform: scaleY(-1); }
+
+.card-flourish {
+  display: block;
+  margin: 0 auto 1rem;
+  color: #8B3A3A;
+  opacity: .35;
+}
+
+.section-decor {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  opacity: .07;
+  color: var(--gold);
+}
+.section-decor.left { top: 50%; left: -10px; transform: translateY(-50%); }
+.section-decor.right { top: 50%; right: -10px; transform: translateY(-50%) scaleX(-1); }
 
 /* ───── Hero ───── */
 .hero {
-  padding-block: 3rem;
+  padding-block: 3rem 2rem;
   text-align: center;
 }
-.hero-label {
+.hero-photo {
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 3/4;
+  margin: 0 auto 2rem;
+  background: var(--bg-alt);
+  border: 2px solid rgba(212,188,138,.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-photo span {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.hero-save {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 13px;
-  letter-spacing: 5px;
+  font-size: 16px;
+  letter-spacing: 6px;
   text-transform: uppercase;
   color: var(--gold);
-  margin: 0 0 1.5rem;
+  margin: 0 0 1rem;
 }
-.hero-frame {
-  position: relative;
-  display: inline-block;
-  padding: 2.5rem 3rem;
-  margin-block: .5rem;
-  text-align: center;
-}
-.hero-frame::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border: 1px solid var(--gold);
-  opacity: .35;
-}
-.hero-frame::after {
-  content: '';
-  position: absolute;
-  inset: 6px;
-  border: 1px solid var(--gold);
-  opacity: .2;
-}
-.hero-corner {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  border-color: var(--gold);
-  border-style: solid;
-  opacity: .6;
-}
-.hero-corner:nth-child(1) { top: -4px; left: -4px; border-width: 2px 0 0 2px; }
-.hero-corner:nth-child(2) { top: -4px; right: -4px; border-width: 2px 2px 0 0; }
-.hero-corner:nth-child(3) { bottom: -4px; left: -4px; border-width: 0 0 2px 2px; }
-.hero-corner:nth-child(4) { bottom: -4px; right: -4px; border-width: 0 2px 2px 0; }
 .hero-names {
   font-family: 'Great Vibes', cursive;
-  font-size: clamp(40px, 10vw, 68px);
+  font-size: clamp(44px, 11vw, 72px);
   font-weight: 400;
   margin: 0;
   line-height: 1.2;
   color: var(--text);
-  text-align: center;
 }
 .hero-names .amp {
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  font-size: .4em;
+  font-size: .35em;
   display: block;
-  margin-block: .15em;
+  margin-block: .1em;
   color: var(--rose);
-}
-.hero-sub {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-top: .8rem;
-  color: var(--gold);
-  opacity: .5;
-  font-size: 12px;
-  letter-spacing: 3px;
-}
-.hero-sub::before, .hero-sub::after {
-  content: '';
-  width: 40px;
-  height: 1px;
-  background: var(--gold);
 }
 .hero-date {
   font-family: 'Playfair Display', serif;
-  font-size: 15px;
-  letter-spacing: 3px;
+  font-size: 17px;
+  letter-spacing: 4px;
   color: var(--text-muted);
   margin: 1.5rem 0 0;
 }
 
-/* ───── Greeting ───── */
-.greeting { text-align: center; }
-.greeting p { margin: 0; font-size: 20px; color: var(--text-muted); }
-.greeting .guest-name {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(32px, 7vw, 48px);
-  color: var(--gold);
-  margin: .5rem 0;
-  line-height: 1.3;
+/* ───── Monogram ───── */
+.monogram {
+  text-align: center;
+  padding-block: 1rem 2rem;
 }
-.greeting .invite-text {
+.mono-letter {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(80px, 20vw, 120px);
+  color: var(--gold);
+  line-height: 1;
+}
+.mono-amp {
   font-family: 'Playfair Display', serif;
-  font-size: 20px;
   font-style: italic;
-  color: var(--text);
-  margin-top: .5rem;
+  font-size: clamp(28px, 6vw, 36px);
+  color: var(--rose);
+  margin-inline: .5rem;
+  vertical-align: middle;
 }
 
-/* ───── Couple ───── */
-.couple-grid {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2rem;
-}
-.couple-card { flex: 0 1 240px; text-align: center; }
-.photo-frame {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  border: 2px solid var(--gold);
-  margin: 0 auto 1rem;
-  overflow: hidden;
-  background: var(--bg-alt);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.photo-frame span {
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.4;
-}
-.couple-card h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 600;
-  margin: 0 0 .3rem;
-}
-.couple-card p {
-  font-size: 15px;
-  color: var(--text-muted);
-  margin: 0;
-  line-height: 1.5;
-}
-.couple-heart {
-  flex: 0 0 auto;
-  align-self: center;
-  width: 40px;
-  height: 40px;
+/* ───── Formal section (3-layer: floral → embossed → cream card) ───── */
+.formal-section {
   position: relative;
-  margin-top: 1rem;
+  margin-inline: -24px;
+  padding: 4.5rem 28px;
+  background: url("bg-floral.jpeg") center / 320px auto repeat;
+  overflow: hidden;
 }
-.couple-heart::before, .couple-heart::after {
+.formal-section::before {
   content: '';
   position: absolute;
-  width: 20px;
-  height: 32px;
-  background: var(--rose);
-  border-radius: 20px 20px 0 0;
+  top: 36px; bottom: 36px; left: 10px; right: 10px;
+  background: url("bg-embossed.jpeg") center / 400px auto repeat;
 }
-.couple-heart::before { left: 20px; transform: rotate(-45deg); transform-origin: 0 100%; }
-.couple-heart::after { left: 0; transform: rotate(45deg); transform-origin: 100% 100%; }
-@media(max-width:560px) {
-  .couple-grid { gap: .8rem; }
-  .couple-card { flex: 1 1 0; min-width: 0; }
-  .photo-frame { width: 110px; height: 110px; }
-  .couple-card h3 { font-size: 17px; }
-  .couple-card p { font-size: 12px; }
-  .couple-heart { width: 28px; height: 28px; transform: scale(.6); margin-top: 0; }
-}
-
-/* ───── Events ───── */
-.events h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  font-weight: 600;
-  margin: 0 0 2rem;
+.formal-card {
+  position: relative;
+  z-index: 1;
+  max-width: 540px;
+  margin: 0 auto;
+  background: rgba(255,252,245,0.96);
+  padding: 2.5rem 1.8rem;
   text-align: center;
+  color: var(--text-dark);
+  border: 1px solid rgba(212,188,138,0.35);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.08);
 }
-.event-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+.formal-card::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(212,188,138,0.3);
+  pointer-events: none;
 }
-.event-item {
-  background: var(--card);
-  border: 1px solid var(--divider);
-  padding: 1.5rem 2rem;
-  text-align: center;
-  transition: transform .3s, box-shadow .3s;
-}
-.event-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px var(--gold-subtle);
-}
-.event-item h3 {
+.formal-family h3 {
   font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0 0 .6rem;
-  color: var(--gold);
-}
-.event-item .ev-time {
   font-size: 15px;
-  color: var(--text-muted);
-  margin: 0 0 .3rem;
+  font-weight: 400;
+  color: #4A4A4A;
+  margin: 0 0 .15rem;
   letter-spacing: 1px;
+  text-transform: uppercase;
 }
-.event-item .ev-venue {
+.formal-family p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  color: #4A4A4A;
+  margin: 0;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+.formal-families {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+.formal-dots {
+  font-size: 13px;
+  color: #C0B090;
+  letter-spacing: 1px;
+  margin: -1.5rem 0 .8rem;
+}
+.formal-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #6B6B6B;
+  margin: 0 0 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.formal-guest {
+  font-family: 'Pinyon Script', cursive;
+  font-size: clamp(30px, 8vw, 42px);
+  font-weight: 400;
+  color: #5A5A5A;
+  margin: .1rem 0 0;
+  line-height: 1.2;
+}
+.formal-text {
+  font-family: 'Cormorant Garamond', serif;
   font-size: 17px;
   font-weight: 500;
+  color: #5A5A5A;
+  margin: 0 0 1rem;
+  font-style: normal;
+  line-height: 1.3;
+}
+.formal-couple {
+  font-family: 'Pinyon Script', cursive;
+  font-size: clamp(50px, 12vw, 64px);
+  font-weight: 400;
+  color: #3A3A3A;
+  margin: 0 0 0rem;
+  line-height: 1.5;
+}
+.formal-couple .amp {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: .6em;
+  display: block;
+  margin-block: .15em;
+  color: #3A3A3A;
+}
+.formal-events {
+  padding-top: -1em;
+}
+.formal-event {
+  padding: 1.2rem 0;
+}
+.formal-event + .formal-event {
+  border-top: 1px solid rgba(212,188,138,0.25);
+}
+.formal-event-badge {
+  display: inline-block;
+  background: #615954;
+  border: none;
+  border-radius: 20px;
+  padding: 2px 36px;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: .6rem;
+}
+.formal-event-time {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dark-muted);
   margin: 0;
 }
-.event-item .ev-address {
+.formal-event-date {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 8vw, 42px);
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 0rem;
+  letter-spacing: 2px;
+}
+.formal-event-lunar {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-weight:400;
+  font-style: italic;
+  color: var(--text-dark-muted);
+  margin: 0 0 .2rem;
+}
+.formal-event-at {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  letter-spacing: 2px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--text-dark-muted);
+  margin: 0 0 .2rem;
+}
+.formal-event-venue {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dark);
+  margin: 0 0 .1rem;
+  line-height: 1.4;
+}
+.formal-event-address {
   font-size: 14px;
-  color: var(--text-muted);
-  margin: .2rem 0 0;
+  color: var(--text-dark-muted);
+  margin: 0 0 .6rem;
+  line-height: 1.4;
+}
+.formal-event-map {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 15px;
+  color: #615954;
+  text-decoration: none;
+  padding: 0;
+  animation: pulse-map 2s ease-in-out infinite;
+}
+@keyframes pulse-map {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+.formal-event-map svg {
+  width: 14px;
+  height: 14px;
+  fill: #615954;
 }
 
 /* ───── Countdown ───── */
 .countdown-section {
-  background: rgba(35,30,24,0.4);
-  margin-inline: -24px;
-  padding-inline: 24px;
   text-align: center;
 }
 .countdown-section h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  font-weight: 600;
-  margin: 0 0 0rem;
+  font-family: 'Alex Brush', cursive;
+  font-size: 48px;
+  font-weight: 500;
+  margin: 0 0 .5rem;
 }
 .countdown-grid {
   display: flex;
@@ -529,79 +634,25 @@ section {
   color: var(--text-muted);
 }
 
-/* ───── Story Timeline ───── */
-.story h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  font-weight: 600;
-  margin: 0 0 2.5rem;
-  text-align: center;
-}
-.timeline {
-  position: relative;
-  padding-left: 2rem;
-}
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 5px;
-  top: 8px;
-  bottom: 8px;
-  width: 1px;
-  background: var(--gold);
-  opacity: .4;
-}
-.tl-item {
-  position: relative;
-  padding-bottom: 2rem;
-  padding-left: 1.5rem;
-}
-.tl-item:last-child { padding-bottom: 0; }
-.tl-item::before {
-  content: '';
-  position: absolute;
-  left: -2rem;
-  top: 8px;
-  width: 11px;
-  height: 11px;
-  background: var(--bg);
-  border: 2px solid var(--gold);
-  border-radius: 50%;
-}
-.tl-year {
-  font-family: 'Playfair Display', serif;
-  font-size: 14px;
-  letter-spacing: 3px;
-  color: var(--gold);
-  margin: 0 0 .3rem;
-}
-.tl-item h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0 0 .3rem;
-}
-.tl-item p {
-  font-size: 16px;
-  color: var(--text-muted);
-  margin: 0;
-}
-
 /* ───── Gallery ───── */
+.gallery {
+  position: relative;
+  overflow: hidden;
+}
 .gallery h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  font-weight: 600;
-  margin: 0 0 2rem;
+  font-family: 'Alex Brush', cursive;
+  font-size: 48px;
+  font-weight: 500;
+  margin: 0 0 0.5rem;
   text-align: center;
 }
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
 }
 .gallery-cell {
-  aspect-ratio: 1;
+  aspect-ratio: 4/5;
   background: var(--bg-alt);
   border: 1px solid var(--divider);
   display: flex;
@@ -610,21 +661,45 @@ section {
   overflow: hidden;
   transition: transform .3s;
 }
-.gallery-cell:hover { transform: scale(1.03); }
+.gallery-cell:hover { transform: scale(1.02); }
 .gallery-cell span {
   font-size: 13px;
   color: var(--text-muted);
 }
 
+/* ───── Story Timeline (paper) ───── */
+/* ───── Thank you ───── */
+.thankyou {
+  text-align: center;
+  padding-block: 3rem;
+}
+.thankyou p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  color: var(--text);
+  margin: 0;
+  font-style: italic;
+  line-height: 1.8;
+}
+
 /* ───── Wishes ───── */
 .wishes { text-align: center; }
 .wishes h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  font-weight: 600;
-  margin: 0 0 .5rem;
+  font-family: 'Alex Brush', cursive;
+  font-size: clamp(58px, 16vw, 78px);
+  font-weight: 500;
+  color: var(--gold-light);
+  margin: 0 0 -1rem;
 }
-.wishes > p { color: var(--text-muted); margin: 0 0 2rem; }
+.wishes > p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  color: var(--text-muted);
+  margin: 0 0 1.2rem;
+  line-height: 1.7;
+  max-width: 380px;
+  margin-inline: auto;
+}
 #wish-form {
   max-width: 480px;
   margin: 0 auto 2.5rem;
@@ -639,27 +714,34 @@ section {
   box-sizing: border-box;
   font-family: 'Cormorant Garamond', serif;
   font-size: 16px;
-  padding: 12px 16px;
-  border: 1px solid var(--divider);
-  background: var(--card);
-  color: var(--text);
+  padding: 14px 16px;
+  border: none;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.92);
+  color: var(--text-dark);
   outline: none;
-  transition: border-color .3s;
+  transition: box-shadow .3s;
+}
+#wish-form input::placeholder,
+#wish-form textarea::placeholder {
+  color: #999;
 }
 #wish-form input:focus,
 #wish-form textarea:focus {
-  border-color: var(--gold);
+  box-shadow: 0 0 0 2px var(--gold);
 }
 #wish-form textarea { resize: vertical; min-height: 100px; }
 #wish-form button {
   align-self: center;
   background: var(--gold);
-  color: #fff;
+  color: #800020;
   border: none;
+  border-radius: 4px;
   font-family: 'Cormorant Garamond', serif;
   font-size: 16px;
+  font-weight: 600;
   letter-spacing: 2px;
-  padding: 12px 36px;
+  padding: 13px 40px;
   cursor: pointer;
   transition: opacity .3s;
 }
@@ -683,7 +765,7 @@ section {
 .wish-status.error {
   display: block;
   background: rgba(244,67,54,.12);
-  color: #c62828;
+  color: #ef9a9a;
   border: 1px solid rgba(244,67,54,.3);
 }
 #wish-form button:disabled {
@@ -699,7 +781,7 @@ section {
   border: none;
   color: var(--text-muted);
   font-family: 'Cormorant Garamond', serif;
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: .5px;
   padding: 0;
   cursor: pointer;
@@ -829,11 +911,6 @@ section {
   background: var(--gold);
   transform: scale(1.3);
 }
-.wish-counter {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 14px;
-  color: var(--text-muted);
-}
 .wish-loading, .wish-empty {
   color: var(--text-muted);
   font-family: 'Cormorant Garamond', serif;
@@ -845,7 +922,7 @@ section {
 /* ───── Footer ───── */
 footer {
   text-align: center;
-  padding-block: 0 2rem;
+  padding-block: 1rem 2.5rem;
 }
 footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
 .footer-names {
@@ -965,7 +1042,7 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
 .reveal {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity .7s ease, transform .7s ease;
+  transition: opacity .8s ease, transform .8s ease;
 }
 .reveal.shown {
   opacity: 1;
@@ -997,22 +1074,14 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
 /* ───── Responsive ───── */
 @media(max-width: 600px) {
   body { font-size: 17px; }
-  section { padding: 1.5rem 1rem; }
-  .hero { padding-block: 1.5rem; }
+  section { padding-block: 2rem; }
+  .hero { padding-block: 2rem 1.5rem; }
+  .hero-photo { max-width: 300px; }
+  .card-inner { padding: 2rem 1.2rem; }
+  .card-families { grid-template-columns: 1fr; gap: 1.5rem; }
   .event-item { padding: 1.2rem 1rem; }
   .event-item h3 { font-size: 18px; }
-  .event-item p { font-size: 15px; }
-  .timeline { padding-left: 1.5rem; }
-  .tl-item { padding-left: 1rem; }
-  .tl-item::before { left: -1.5rem; }
-  .tl-date { font-size: 14px; }
-  .tl-title { font-size: 18px; }
-  .tl-item p { font-size: 15px; }
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  .greeting p { font-size: 18px; }
-  .countdown-item .num { font-size: 24px; }
-  .countdown-item .lbl { font-size: 12px; }
-  .wish-card { font-size: 15px; }
+  .gallery-grid { gap: 8px; }
   footer p { font-size: 14px; }
 }
 </style>
@@ -1053,81 +1122,93 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
 
   <!-- Hero -->
   <section class="hero reveal">
-    <p class="hero-label">Save the Date</p>
-    <div class="hero-frame">
-      <span class="hero-corner"></span>
-      <span class="hero-corner"></span>
-      <span class="hero-corner"></span>
-      <span class="hero-corner"></span>
-      <h1 class="hero-names">
-        Quỳnh Anh
-        <span class="amp">&</span>
-        Đức Phong
-      </h1>
-      <div class="hero-sub" aria-hidden="true">We're getting married</div>
+    <div class="hero-photo">
+      <svg viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".2" color="var(--text-muted)">
+        <rect x="6" y="14" width="36" height="26" rx="2"/><path d="M16 14l2-4h12l2 4"/><circle cx="24" cy="28" r="7"/><circle cx="24" cy="28" r="3"/>
+      </svg>
     </div>
+    <p class="hero-save">Save the Date</p>
+    <h1 class="hero-names">
+      Quỳnh Anh
+      <span class="amp">&</span>
+      Đức Phong
+    </h1>
     <p class="hero-date">13 . 11 &mdash; 14 . 11 . 2026</p>
   </section>
 
-  <div class="ornament" aria-hidden="true"><i></i></div>
-
-  <!-- Greeting -->
-  <section class="greeting reveal">
-    <p>Trân trọng kính mời</p>
-    <h2 class="guest-name" id="guest-name">Quý Khách</h2>
-    <p class="invite-text">đến dự lễ thành hôn của chúng tôi</p>
+  <!-- Monogram -->
+  <section class="monogram reveal">
+    <span class="mono-letter">A</span>
+    <span class="mono-amp">&</span>
+    <span class="mono-letter">P</span>
   </section>
 
-  <div class="ornament" aria-hidden="true"><i></i></div>
+  <!-- Formal Section (3-layer: floral → embossed → cream card) -->
+  <section class="formal-section reveal">
+    <div class="formal-card">
+      <div class="formal-families reveal">
+        <div class="formal-family">
+          <h3>Nhà Trai</h3>
+          <p>Ông: Hoàng Phi Phục</p>
+          <p>Bà: Nguyễn Thị Thu Hà</p>
+        </div>
+        <div class="formal-family">
+          <h3>Nhà Gái</h3>
+          <p>Ông: Lê Văn Sơn</p>
+          <p>Bà: Hoàng Hoa Mỹ</p>
+        </div>
+      </div>
+      <p class="formal-label reveal">Kính mời</p>
+      <h2 class="formal-guest reveal" id="guest-name">Quý khách</h2>
+      <p class="formal-dots reveal">· · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·</p>
+      <p class="formal-text reveal">Đến dự Lễ cưới và chung vui<br>cùng gia đình chúng tôi</p>
+      <h2 class="formal-couple reveal">
+        Quỳnh Anh
+        <span class="amp">&</span>
+        Đức Phong
+      </h2>
+      <div class="formal-events">
+        <div class="formal-event reveal">
+          <span class="formal-event-badge">Lễ Vu Quy</span>
+          <p class="formal-event-time">Vào lúc 8h00 ngày Thứ Sáu</p>
+          <p class="formal-event-date">13.11.2026</p>
+          <p class="formal-event-lunar">(Nhằm ngày 04 tháng 10 năm Bính Ngọ)</p>
+          <p class="formal-event-at">Tại</p>
+          <p class="formal-event-venue">Tư gia nhà gái</p>
+          <p class="formal-event-address">Cầu Nhà Trường, Xóm 8, Quỳnh Tân, Quỳnh Văn, Nghệ An</p>
+          <a class="formal-event-map" href="https://www.google.com/maps/search/Quỳnh+Tân+Quỳnh+Văn+Nghệ+An" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg> Chỉ đường</a>
+        </div>
 
-  <!-- Couple -->
-  <section class="reveal">
-    <div class="couple-grid">
-      <div class="couple-card">
-        <div class="photo-frame"><span>Ảnh<br>Chú Rể</span></div>
-        <h3>Hoàng Đức Phong</h3>
-        <p>Con trai<br>Ông Hoàng Phi Phục &amp; Bà Nguyễn Thị Thu Hà</p>
-      </div>
-      <div class="couple-heart" aria-hidden="true"></div>
-      <div class="couple-card">
-        <div class="photo-frame"><span>Ảnh<br>Cô Dâu</span></div>
-        <h3>Lê Hoàng Quỳnh Anh</h3>
-        <p>Con gái<br>Ông Lê Văn Sơn &amp; Bà Hoàng Hoa Mỹ</p>
-      </div>
-    </div>
-  </section>
+        <div class="formal-event reveal">
+          <span class="formal-event-badge">Lễ Thành Hôn</span>
+          <p class="formal-event-time">Vào lúc 9h00 ngày Thứ Bảy</p>
+          <p class="formal-event-date">14.11.2026</p>
+          <p class="formal-event-lunar">(Nhằm ngày 05 tháng 10 năm Bính Ngọ)</p>
+          <p class="formal-event-at">Tại</p>
+          <p class="formal-event-venue">Tư gia nhà trai</p>
+          <p class="formal-event-address">Số nhà 72, Quỳnh Đôi, Quỳnh Anh, Nghệ An</p>
+          <a class="formal-event-map" href="https://www.google.com/maps/search/Quỳnh+Đôi+Quỳnh+Anh+Nghệ+An" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg> Chỉ đường</a>
+        </div>
 
-  <div class="ornament" aria-hidden="true"><i></i></div>
+        <div class="formal-event reveal">
+          <span class="formal-event-badge">Tiệc Cưới</span>
+          <p class="formal-event-time">Vào lúc 10h30 ngày Thứ Bảy</p>
+          <p class="formal-event-date">14.11.2026</p>
+          <p class="formal-event-lunar">(Nhằm ngày 05 tháng 10 năm Bính Ngọ)</p>
+          <p class="formal-event-at">Tại</p>
+          <p class="formal-event-venue">Sân Đa Năng</p>
+          <p class="formal-event-address">Quỳnh Anh, Quỳnh Lưu, Nghệ An</p>
+          <a class="formal-event-map" href="https://www.google.com/maps/search/Sân+Đa+Năng+Quỳnh+Anh+Quỳnh+Lưu+Nghệ+An" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg> Chỉ đường</a>
+        </div>
 
-  <!-- Events -->
-  <section class="events reveal">
-    <h2>Lễ Cưới</h2>
-    <div class="event-list">
-      <div class="event-item">
-        <h3>Lễ Vu Quy</h3>
-        <p class="ev-time">Thứ Sáu, 13/11/2026</p>
-        <p class="ev-venue">Tư gia nhà gái</p>
-        <p class="ev-address">Cầu Nhà Trường, Xóm 8, Quỳnh Tân, Quỳnh Văn, Nghệ An</p>
-      </div>
-      <div class="event-item">
-        <h3>Lễ Thành Hôn</h3>
-        <p class="ev-time">Thứ Bảy, 14/11/2026</p>
-        <p class="ev-venue">Tư gia nhà trai</p>
-        <p class="ev-address">Số nhà 72, Quỳnh Đôi, Quỳnh Anh, Nghệ An</p>
-      </div>
-      <div class="event-item">
-        <h3>Tiệc Cưới</h3>
-        <p class="ev-time">Thứ Bảy, 14/11/2026</p>
-        <p class="ev-venue">Sân Đa Năng</p>
-        <p class="ev-address">Quỳnh Anh, Nghệ An</p>
       </div>
     </div>
   </section>
 
   <!-- Countdown -->
-  <section class="countdown-section reveal">
-    <h2>Đếm Ngược</h2>
-    <div class="countdown-grid">
+  <section class="countdown-section">
+    <h2 class="reveal">Đếm Ngược</h2>
+    <div class="countdown-grid reveal">
       <div class="cd-item"><span class="cd-num" id="cd-d">--</span><span class="cd-label">Ngày</span></div>
       <div class="cd-item"><span class="cd-num" id="cd-h">--</span><span class="cd-label">Giờ</span></div>
       <div class="cd-item"><span class="cd-num" id="cd-m">--</span><span class="cd-label">Phút</span></div>
@@ -1135,69 +1216,40 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
     </div>
   </section>
 
-  <div class="ornament" aria-hidden="true"><i></i></div>
-
-  <!-- Love Story -->
-  <section class="story">
-    <h2 class="reveal">Chuyện Tình Yêu</h2>
-    <div class="timeline">
-      <div class="tl-item reveal">
-        <p class="tl-year">Thuở nhỏ</p>
-        <h3>Lần Đầu Gặp Gỡ</h3>
-        <p>Có lẽ ông trời đã sắp đặt, hai đứa trẻ lớn lên cùng một vùng quê Quỳnh Lưu, vô tình biết đến nhau từ thuở còn thơ dại. Khi ấy, chẳng ai nghĩ rằng sợi dây vô hình ấy rồi sẽ buộc chặt hai trái tim lại với nhau.</p>
-      </div>
-      <div class="tl-item reveal">
-        <p class="tl-year">Đầu 2023</p>
-        <h3>Những Tin Nhắn Đầu Tiên</h3>
-        <p>Năm tháng trôi qua, mỗi người mỗi ngả. Rồi một ngày, qua màn hình điện thoại, hai con người ấy tìm lại nhau. Những cuộc trò chuyện online từ rụt rè đến say mê, từ vài dòng tin nhắn ngắn ngủi đến những đêm dài không muốn tắt màn hình. Khoảng cách địa lý chẳng thể ngăn hai trái tim đang dần xích lại gần nhau hơn từng ngày.</p>
-      </div>
-      <div class="tl-item reveal">
-        <p class="tl-year">21 / 05 / 2023</p>
-        <h3>Chính Thức Hẹn Hò</h3>
-        <p>Ngày gặp lại nhau ngoài đời thực, mọi cảm xúc như vỡ òa. Đôi mắt ấy, nụ cười ấy, giọng nói ấy &mdash; tất cả đều đẹp hơn cả những gì anh tưởng tượng qua màn hình. Và ngày 21 tháng 5 năm 2023, anh nắm lấy tay em, chính thức bắt đầu hành trình yêu thương cùng nhau. Từ đây, không còn là hai người xa lạ nữa &mdash; mà là "chúng mình".</p>
-      </div>
-      <div class="tl-item reveal">
-        <p class="tl-year">2023 &mdash; 2026</p>
-        <h3>Cùng Nhau Xây Dựng</h3>
-        <p>Tình yêu lớn lên qua từng chuyến đi &mdash; cùng nhau ngắm hoàng hôn trên biển, lạc giữa phố cổ trong mưa, hay đơn giản chỉ là ngồi bên nhau trong quán quen ngày cuối tuần. Cũng có những lúc khó khăn, những lần cãi vã rồi lại ôm nhau thật chặt. Mỗi thử thách vượt qua, mỗi nụ cười chia sẻ đều khắc sâu thêm một điều: người này chính là người mình muốn đi cùng đến cuối con đường.</p>
-      </div>
-      <div class="tl-item reveal">
-        <p class="tl-year">28 / 08 / 2026</p>
-        <h3>Lời Cầu Hôn</h3>
-        <p>Rạng sáng ngày 28 tháng 8, khi đồng hồ vừa điểm sang ngày sinh nhật em, anh quỳ gối giữa ánh nến lung linh và hỏi: "Em có muốn cùng anh đi hết cuộc đời này không?" Nước mắt hạnh phúc lăn dài trên má, em gật đầu. Đó là món quà sinh nhật đẹp nhất mà em từng nhận được &mdash; và cũng là lời hứa đẹp nhất mà anh từng nói.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="ornament" aria-hidden="true"><i></i></div>
-
   <!-- Gallery -->
-  <section class="gallery reveal">
-    <h2>Album Ảnh</h2>
+  <section class="gallery">
+    <div class="ornament reveal" aria-hidden="true"><i></i></div>
+    <h2 class="reveal">Album Ảnh</h2>
     <div class="gallery-grid">
-      <div class="gallery-cell"><span>Ảnh 1</span></div>
-      <div class="gallery-cell"><span>Ảnh 2</span></div>
-      <div class="gallery-cell"><span>Ảnh 3</span></div>
-      <div class="gallery-cell"><span>Ảnh 4</span></div>
-      <div class="gallery-cell"><span>Ảnh 5</span></div>
-      <div class="gallery-cell"><span>Ảnh 6</span></div>
+      <div class="gallery-cell reveal"><svg viewBox="0 0 36 36" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1" opacity=".15" color="var(--text-muted)"><rect x="4" y="10" width="28" height="20" rx="1.5"/><path d="M12 10l1.5-3h9l1.5 3"/><circle cx="18" cy="21" r="5.5"/></svg></div>
+      <div class="gallery-cell reveal"><svg viewBox="0 0 36 36" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1" opacity=".15" color="var(--text-muted)"><rect x="4" y="10" width="28" height="20" rx="1.5"/><path d="M12 10l1.5-3h9l1.5 3"/><circle cx="18" cy="21" r="5.5"/></svg></div>
+      <div class="gallery-cell reveal"><svg viewBox="0 0 36 36" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1" opacity=".15" color="var(--text-muted)"><rect x="4" y="10" width="28" height="20" rx="1.5"/><path d="M12 10l1.5-3h9l1.5 3"/><circle cx="18" cy="21" r="5.5"/></svg></div>
+      <div class="gallery-cell reveal"><svg viewBox="0 0 36 36" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1" opacity=".15" color="var(--text-muted)"><rect x="4" y="10" width="28" height="20" rx="1.5"/><path d="M12 10l1.5-3h9l1.5 3"/><circle cx="18" cy="21" r="5.5"/></svg></div>
+      <div class="gallery-cell reveal"><svg viewBox="0 0 36 36" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1" opacity=".15" color="var(--text-muted)"><rect x="4" y="10" width="28" height="20" rx="1.5"/><path d="M12 10l1.5-3h9l1.5 3"/><circle cx="18" cy="21" r="5.5"/></svg></div>
+      <div class="gallery-cell reveal"><svg viewBox="0 0 36 36" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1" opacity=".15" color="var(--text-muted)"><rect x="4" y="10" width="28" height="20" rx="1.5"/><path d="M12 10l1.5-3h9l1.5 3"/><circle cx="18" cy="21" r="5.5"/></svg></div>
+      <div class="gallery-cell reveal"><svg viewBox="0 0 36 36" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1" opacity=".15" color="var(--text-muted)"><rect x="4" y="10" width="28" height="20" rx="1.5"/><path d="M12 10l1.5-3h9l1.5 3"/><circle cx="18" cy="21" r="5.5"/></svg></div>
+      <div class="gallery-cell reveal"><svg viewBox="0 0 36 36" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1" opacity=".15" color="var(--text-muted)"><rect x="4" y="10" width="28" height="20" rx="1.5"/><path d="M12 10l1.5-3h9l1.5 3"/><circle cx="18" cy="21" r="5.5"/></svg></div>
     </div>
   </section>
 
-  <div class="ornament" aria-hidden="true"><i></i></div>
+  <!-- Thank You -->
+  <section class="thankyou">
+    <div class="ornament reveal" aria-hidden="true"><i></i></div>
+    <p class="reveal">Sự hiện diện của quý khách là niềm vinh hạnh cho gia đình chúng tôi</p>
+  </section>
 
   <!-- Wishes -->
-  <section class="wishes reveal">
-    <h2>Sổ Lưu Bút</h2>
-    <p>Hãy để lại lời chúc tốt đẹp cho chúng tôi nhé</p>
-    <form id="wish-form">
-      <input type="text" id="w-name" placeholder="Tên của bạn" required maxlength="60">
-      <textarea id="w-msg" placeholder="Lời chúc của bạn..." required maxlength="500"></textarea>
+  <section class="wishes">
+    <h2 class="reveal">Sổ lưu bút</h2>
+    <p class="reveal">Cảm ơn bạn rất nhiều vì đã gửi những lời chúc mừng tốt đẹp nhất đến đám cưới của chúng tôi!</p>
+    <form id="wish-form" class="reveal">
+      <input type="text" id="w-name" placeholder="Nhập tên của bạn*" required maxlength="60">
+      <textarea id="w-msg" placeholder="Nhập lời chúc của bạn*" required maxlength="500"></textarea>
       <input type="text" id="w-hp" class="wish-hp" tabindex="-1" autocomplete="off">
-      <button type="submit" id="wish-btn">Gửi Lời Chúc</button>
+      <button type="submit" id="wish-btn">Gửi lời chúc</button>
     </form>
     <div id="wish-status" class="wish-status"></div>
-    <button class="wish-toggle" id="wish-toggle">Xem lời chúc từ mọi người <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <button class="wish-toggle reveal" id="wish-toggle">Xem lời chúc từ mọi người <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
     <div class="wish-slider-wrap" id="wish-slider-wrap">
       <div class="wish-carousel" id="wish-carousel"></div>
       <div class="wish-nav" id="wish-nav" style="display:none">
@@ -1210,10 +1262,9 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
 
   <!-- Footer -->
   <footer>
-    <div class="ornament" aria-hidden="true"><i></i></div>
-    <p>Sự hiện diện của quý khách là niềm vinh hạnh cho gia đình chúng tôi</p>
-    <p class="footer-names">Quỳnh Anh & Đức Phong</p>
-    <p class="footer-tag">#QuAnhPhong2026</p>
+    <div class="ornament reveal" aria-hidden="true"><i></i></div>
+    <p class="footer-names reveal">Quỳnh Anh & Đức Phong</p>
+    <p class="footer-tag reveal">#QuAnhPhong2026</p>
   </footer>
 
 </main>
@@ -1256,6 +1307,21 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
       cover.classList.add('opened');
       invitation.classList.add('visible');
       document.body.style.overflow = '';
+      /* ── Scroll reveal (init after cover opens) ── */
+      var reveals = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('shown');
+              obs.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        reveals.forEach(function (el) { obs.observe(el); });
+      } else {
+        reveals.forEach(function (el) { el.classList.add('shown'); });
+      }
       startPetals();
       setTimeout(function () { cover.style.display = 'none'; }, 2000);
       bgMusic.play().then(function () {
@@ -1270,7 +1336,7 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
 
   /* ── Auto-scroll ── */
   var autoScrollId = null;
-  var autoScrollSpeed = 0.5;
+  var autoScrollSpeed = 0; // tochange
   var pauseTimer = null;
 
   function startAutoScroll() {
@@ -1311,22 +1377,6 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
     }
   });
   document.body.style.overflow = 'hidden';
-
-  /* ── Scroll reveal ── */
-  var reveals = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
-    var obs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          e.target.classList.add('shown');
-          obs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    reveals.forEach(function (el) { obs.observe(el); });
-  } else {
-    reveals.forEach(function (el) { el.classList.add('shown'); });
-  }
 
   /* ── Countdown ── */
   var dEl = document.getElementById('cd-d');
