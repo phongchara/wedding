@@ -329,55 +329,99 @@ section {
 
 /* ───── Hero ───── */
 .hero {
-  padding-block: 3rem 2rem;
-  text-align: center;
-}
-.hero-photo {
-  width: 100%;
-  max-width: 380px;
-  aspect-ratio: 3/4;
-  margin: 0 auto 2rem;
-  background: var(--bg-alt);
-  border: 2px solid rgba(212,188,138,.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
   overflow: hidden;
-}
-.hero-photo span {
-  font-size: 14px;
-  color: var(--text-muted);
-}
-.hero-save {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 16px;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin: 0 0 1rem;
-}
-.hero-names {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(44px, 11vw, 72px);
-  font-weight: 400;
+  opacity: 0;
+  transition: opacity .8s ease 1.5s;
   margin: 0;
-  line-height: 1.2;
-  color: var(--text);
+  padding: 0 !important;
+  width: 100%;
 }
-.hero-names .amp {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: .35em;
+.hero.visible {
+  opacity: 1;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(59,10,10,0.5) 55%, var(--bg) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+.hero-spacer {
+  height: 32px;
+  background: var(--bg);
+  margin-top: -1px;
+}
+.hero-img {
+  width: 100%;
   display: block;
-  margin-block: .1em;
-  color: var(--rose);
+  object-fit: cover;
 }
-.hero-date {
-  font-family: 'Playfair Display', serif;
-  font-size: 17px;
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  z-index: 3;
+}
+.hero-overlay .hero-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 .3rem;
+  background: rgba(0,0,0,0.18);
+  padding: 4px 16px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.hero-monogram {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(64px, 22vw, 120px);
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  transform: rotate(-5deg) translateX(-0.15em);
+  text-shadow: 0 2px 16px rgba(0,0,0,0.15);
+}
+.hero-monogram .mono-a {
+  display: inline-block;
+  transform: translateY(-0.12em);
+}
+.hero-monogram .mono-p {
+  display: inline-block;
+  transform: translateY(0.12em);
+}
+.hero-monogram .amp {
+  font-family: 'Great Vibes', cursive;
+  font-size: .45em;
+  display: inline-block;
+  margin-inline: 0.08em;
+  opacity: .7;
+}
+.hero-overlay .hero-date {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
   letter-spacing: 4px;
-  color: var(--text-muted);
-  margin: 1.5rem 0 0;
+  color: #fff;
+  margin: .4rem 0 0;
+  background: rgba(0,0,0,0.18);
+  padding: 4px 14px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 /* ───── Monogram ───── */
@@ -601,11 +645,21 @@ section {
 .countdown-section {
   text-align: center;
 }
-.countdown-section h2 {
-  font-family: 'Alex Brush', cursive;
-  font-size: 48px;
-  font-weight: 500;
-  margin: 0 0 .5rem;
+.countdown-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 1.0px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 1.2rem 0 0;
+  opacity: .8;
+  white-space: nowrap;
+  animation: quote-beat 3s ease-in-out infinite;
+}
+@keyframes quote-beat {
+  0%, 100% { transform: scale(1); opacity: .8; }
+  50% { transform: scale(1.05); opacity: 1; }
 }
 .countdown-grid {
   display: flex;
@@ -638,6 +692,7 @@ section {
 .gallery {
   position: relative;
   overflow: hidden;
+  margin-inline: -22px;
 }
 .gallery h2 {
   font-family: 'Alex Brush', cursive;
@@ -648,23 +703,134 @@ section {
 }
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  grid-template-columns: 5fr 4fr;
+  grid-auto-rows: 130px;
+  gap: 4px;
+  perspective: 800px;
 }
 .gallery-cell {
-  aspect-ratio: 4/5;
-  background: var(--bg-alt);
-  border: 1px solid var(--divider);
-  display: flex;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform .4s cubic-bezier(.25,.46,.45,.94), box-shadow .4s ease;
+  will-change: transform;
+}
+.gallery-cell img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform .6s cubic-bezier(.25,.46,.45,.94);
+  pointer-events: none;
+}
+.gallery-cell .gal-shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity .3s ease;
+  z-index: 2;
+}
+.gallery-cell.tilt-active .gal-shine { opacity: 1; }
+.gallery-cell .gal-ripple {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,188,138,0.4) 0%, transparent 70%);
+  transform: translate(-50%, -50%) scale(0);
+  pointer-events: none;
+  z-index: 3;
+}
+@keyframes ripple-out {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+}
+.gallery-cell:hover img,
+.gallery-cell.tilt-active img { transform: scale(1.05); }
+.gallery-cell:hover,
+.gallery-cell.tilt-active {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  z-index: 2;
+}
+
+.gallery-cell.reveal {
+  opacity: 0;
+  transform: translateY(40px) rotateX(8deg);
+}
+.gallery-cell.reveal.shown {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
+.gallery-cell:nth-child(odd).reveal.shown { transition: opacity .7s ease, transform .7s cubic-bezier(.25,.46,.45,.94); }
+.gallery-cell:nth-child(even).reveal.shown { transition: opacity .7s ease .15s, transform .7s cubic-bezier(.25,.46,.45,.94) .15s; }
+
+/* ───── Lightbox ───── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.92);
+  display: none;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  transition: transform .3s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
-.gallery-cell:hover { transform: scale(1.02); }
-.gallery-cell span {
-  font-size: 13px;
-  color: var(--text-muted);
+.lightbox.active { display: flex; }
+.lightbox-img {
+  max-width: 92vw;
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 4px;
+  transition: opacity .3s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+}
+.lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  font-size: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+  transition: background .2s;
+}
+.lightbox-arrow:hover { background: rgba(255,255,255,0.25); }
+.lightbox-arrow.prev { left: 12px; }
+.lightbox-arrow.next { right: 12px; }
+.lightbox-counter {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.6);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  letter-spacing: 2px;
 }
 
 /* ───── Story Timeline (paper) ───── */
@@ -1108,7 +1274,7 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
           <span class="amp">&</span>
           Đức Phong
         </h1>
-        <p class="cover-date">13 - 14 . 11 . 2026</p>
+        <p class="cover-date">14 - 15 . 11 . 2026</p>
       </div>
     </div>
   </div>
@@ -1117,31 +1283,19 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
 <!-- ═══════ Petals container ═══════ -->
 <div id="petals" aria-hidden="true"></div>
 
+<!-- ═══════ Hero ═══════ -->
+<section class="hero" id="hero-section">
+  <img class="hero-img" src="0M3A0510ap.jpg" alt="Quỳnh Anh & Đức Phong">
+  <div class="hero-overlay">
+    <p class="hero-label">Save the Date</p>
+    <h1 class="hero-monogram"><span class="mono-a">A</span><span class="amp">&</span><span class="mono-p">P</span></h1>
+    <p class="hero-date">14 . 11 &mdash; 15 . 11 . 2026</p>
+  </div>
+</section>
+<div class="hero-spacer"></div>
+
 <!-- ═══════ Invitation ═══════ -->
 <main id="invitation">
-
-  <!-- Hero -->
-  <section class="hero reveal">
-    <div class="hero-photo">
-      <svg viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".2" color="var(--text-muted)">
-        <rect x="6" y="14" width="36" height="26" rx="2"/><path d="M16 14l2-4h12l2 4"/><circle cx="24" cy="28" r="7"/><circle cx="24" cy="28" r="3"/>
-      </svg>
-    </div>
-    <p class="hero-save">Save the Date</p>
-    <h1 class="hero-names">
-      Quỳnh Anh
-      <span class="amp">&</span>
-      Đức Phong
-    </h1>
-    <p class="hero-date">13 . 11 &mdash; 14 . 11 . 2026</p>
-  </section>
-
-  <!-- Monogram -->
-  <section class="monogram reveal">
-    <span class="mono-letter">A</span>
-    <span class="mono-amp">&</span>
-    <span class="mono-letter">P</span>
-  </section>
 
   <!-- Formal Section (3-layer: floral → embossed → cream card) -->
   <section class="formal-section reveal">
@@ -1169,10 +1323,10 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
       </h2>
       <div class="formal-events">
         <div class="formal-event reveal">
-          <span class="formal-event-badge">Lễ Vu Quy</span>
-          <p class="formal-event-time">Vào lúc 8h00 ngày Thứ Sáu</p>
-          <p class="formal-event-date">13.11.2026</p>
-          <p class="formal-event-lunar">(Nhằm ngày 04 tháng 10 năm Bính Ngọ)</p>
+          <span class="formal-event-badge">Lễ Ăn Hỏi</span>
+          <p class="formal-event-time">Vào lúc 8h00 ngày Thứ Bảy</p>
+          <p class="formal-event-date">14.11.2026</p>
+          <p class="formal-event-lunar">(Nhằm ngày 06 tháng 10 năm Bính Ngọ)</p>
           <p class="formal-event-at">Tại</p>
           <p class="formal-event-venue">Tư gia nhà gái</p>
           <p class="formal-event-address">Cầu Nhà Trường, Xóm 8, Quỳnh Tân, Quỳnh Văn, Nghệ An</p>
@@ -1183,22 +1337,33 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
           <span class="formal-event-badge">Lễ Thành Hôn</span>
           <p class="formal-event-time">Vào lúc 9h00 ngày Thứ Bảy</p>
           <p class="formal-event-date">14.11.2026</p>
-          <p class="formal-event-lunar">(Nhằm ngày 05 tháng 10 năm Bính Ngọ)</p>
+          <p class="formal-event-lunar">(Nhằm ngày 06 tháng 10 năm Bính Ngọ)</p>
           <p class="formal-event-at">Tại</p>
           <p class="formal-event-venue">Tư gia nhà trai</p>
           <p class="formal-event-address">Số nhà 72, Quỳnh Đôi, Quỳnh Anh, Nghệ An</p>
           <a class="formal-event-map" href="https://www.google.com/maps/search/Quỳnh+Đôi+Quỳnh+Anh+Nghệ+An" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg> Chỉ đường</a>
         </div>
 
-        <div class="formal-event reveal">
+        <div class="formal-event reveal" id="party-groom">
           <span class="formal-event-badge">Tiệc Cưới</span>
           <p class="formal-event-time">Vào lúc 10h30 ngày Thứ Bảy</p>
           <p class="formal-event-date">14.11.2026</p>
-          <p class="formal-event-lunar">(Nhằm ngày 05 tháng 10 năm Bính Ngọ)</p>
+          <p class="formal-event-lunar">(Nhằm ngày 06 tháng 10 năm Bính Ngọ)</p>
           <p class="formal-event-at">Tại</p>
           <p class="formal-event-venue">Sân Đa Năng</p>
           <p class="formal-event-address">Quỳnh Anh, Quỳnh Lưu, Nghệ An</p>
           <a class="formal-event-map" href="https://www.google.com/maps/search/Sân+Đa+Năng+Quỳnh+Anh+Quỳnh+Lưu+Nghệ+An" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg> Chỉ đường</a>
+        </div>
+
+        <div class="formal-event reveal" id="party-bride" style="display:none">
+          <span class="formal-event-badge">Tiệc Chung Vui</span>
+          <p class="formal-event-time">Vào lúc 10h30 ngày Chủ Nhật</p>
+          <p class="formal-event-date">15.11.2026</p>
+          <p class="formal-event-lunar">(Nhằm ngày 07 tháng 10 năm Bính Ngọ)</p>
+          <p class="formal-event-at">Tại</p>
+          <p class="formal-event-venue">Trường Tiểu Học Quỳnh Tân</p>
+          <p class="formal-event-address">Thôn 18, xã Quỳnh Văn, tỉnh Nghệ An<br>(thôn 8, Quỳnh Tân cũ)</p>
+          <a class="formal-event-map" href="https://www.google.com/maps/search/Trường+Tiểu+Học+Quỳnh+Tân+Quỳnh+Văn+Nghệ+An" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg> Chỉ đường</a>
         </div>
 
       </div>
@@ -1207,13 +1372,13 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
 
   <!-- Countdown -->
   <section class="countdown-section">
-    <h2 class="reveal">Đếm Ngược</h2>
     <div class="countdown-grid reveal">
       <div class="cd-item"><span class="cd-num" id="cd-d">--</span><span class="cd-label">Ngày</span></div>
       <div class="cd-item"><span class="cd-num" id="cd-h">--</span><span class="cd-label">Giờ</span></div>
       <div class="cd-item"><span class="cd-num" id="cd-m">--</span><span class="cd-label">Phút</span></div>
       <div class="cd-item"><span class="cd-num" id="cd-s">--</span><span class="cd-label">Giây</span></div>
     </div>
+    <p class="countdown-quote reveal">"Một mái nhà, một giấc mơ, một đời"</p>
   </section>
 
   <!-- Gallery -->
@@ -1221,14 +1386,24 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
     <div class="ornament reveal" aria-hidden="true"><i></i></div>
     <h2 class="reveal">Album Ảnh</h2>
     <div class="gallery-grid">
-      <div class="gallery-cell reveal"><svg viewBox="0 0 36 36" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1" opacity=".15" color="var(--text-muted)"><rect x="4" y="10" width="28" height="20" rx="1.5"/><path d="M12 10l1.5-3h9l1.5 3"/><circle cx="18" cy="21" r="5.5"/></svg></div>
-      <div class="gallery-cell reveal"><svg viewBox="0 0 36 36" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1" opacity=".15" color="var(--text-muted)"><rect x="4" y="10" width="28" height="20" rx="1.5"/><path d="M12 10l1.5-3h9l1.5 3"/><circle cx="18" cy="21" r="5.5"/></svg></div>
-      <div class="gallery-cell reveal"><svg viewBox="0 0 36 36" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1" opacity=".15" color="var(--text-muted)"><rect x="4" y="10" width="28" height="20" rx="1.5"/><path d="M12 10l1.5-3h9l1.5 3"/><circle cx="18" cy="21" r="5.5"/></svg></div>
-      <div class="gallery-cell reveal"><svg viewBox="0 0 36 36" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1" opacity=".15" color="var(--text-muted)"><rect x="4" y="10" width="28" height="20" rx="1.5"/><path d="M12 10l1.5-3h9l1.5 3"/><circle cx="18" cy="21" r="5.5"/></svg></div>
-      <div class="gallery-cell reveal"><svg viewBox="0 0 36 36" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1" opacity=".15" color="var(--text-muted)"><rect x="4" y="10" width="28" height="20" rx="1.5"/><path d="M12 10l1.5-3h9l1.5 3"/><circle cx="18" cy="21" r="5.5"/></svg></div>
-      <div class="gallery-cell reveal"><svg viewBox="0 0 36 36" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1" opacity=".15" color="var(--text-muted)"><rect x="4" y="10" width="28" height="20" rx="1.5"/><path d="M12 10l1.5-3h9l1.5 3"/><circle cx="18" cy="21" r="5.5"/></svg></div>
-      <div class="gallery-cell reveal"><svg viewBox="0 0 36 36" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1" opacity=".15" color="var(--text-muted)"><rect x="4" y="10" width="28" height="20" rx="1.5"/><path d="M12 10l1.5-3h9l1.5 3"/><circle cx="18" cy="21" r="5.5"/></svg></div>
-      <div class="gallery-cell reveal"><svg viewBox="0 0 36 36" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1" opacity=".15" color="var(--text-muted)"><rect x="4" y="10" width="28" height="20" rx="1.5"/><path d="M12 10l1.5-3h9l1.5 3"/><circle cx="18" cy="21" r="5.5"/></svg></div>
+      <!-- Row 1-3: big left + small right -->
+      <div class="gallery-cell reveal" style="grid-column:1;grid-row:1/4"><img src="0M3A0288.jpg" alt="" loading="lazy" style="object-position:center 25%"></div>
+      <div class="gallery-cell reveal" style="grid-column:2;grid-row:1/3"><img src="0M3A0320.jpg" alt="" loading="lazy" style="object-position:center 20%"></div>
+      <div class="gallery-cell reveal" style="grid-column:2;grid-row:3/4"><img src="0M3A0361.jpg" alt="" loading="lazy" style="object-position:center 15%"></div>
+      <!-- Row 4-6: wide panoramic -->
+      <div class="gallery-cell reveal" style="grid-column:1/-1;grid-row:4/6"><img src="0M3A0491.jpg" alt="" loading="lazy" style="object-position:center 28%"></div>
+      <!-- Row 6-9: big left + small right (zigzag) -->
+      <div class="gallery-cell reveal" style="grid-column:1;grid-row:6/9"><img src="0M3A0435.jpg" alt="" loading="lazy" style="object-position:center 30%"></div>
+      <div class="gallery-cell reveal" style="grid-column:2;grid-row:6/7"><img src="0M3A0200.jpg" alt="" loading="lazy" style="object-position:center 25%"></div>
+      <div class="gallery-cell reveal" style="grid-column:2;grid-row:7/9"><img src="0M3A0540.jpg" alt="" loading="lazy" style="object-position:center 20%"></div>
+      <!-- Row 9-12: big left + small right -->
+      <div class="gallery-cell reveal" style="grid-column:1;grid-row:9/12"><img src="0M3A0561.jpg" alt="" loading="lazy" style="object-position:center 15%"></div>
+      <div class="gallery-cell reveal" style="grid-column:2;grid-row:9/11"><img src="0M3A0548.jpg" alt="" loading="lazy" style="object-position:center 10%"></div>
+      <div class="gallery-cell reveal" style="grid-column:2;grid-row:11/12"><img src="0M3A0592.jpg" alt="" loading="lazy" style="object-position:center 20%"></div>
+      <!-- Row 12-14: wide panoramic closer -->
+      <div class="gallery-cell reveal" style="grid-column:1/-1;grid-row:12/14"><img src="0M3A0598.jpg" alt="" loading="lazy" style="object-position:center 30%"></div>
+      <!-- Row 14-16: full width finale -->
+      <div class="gallery-cell reveal" style="grid-column:1/-1;grid-row:14/16"><img src="0M3A0788.jpg" alt="" loading="lazy" style="object-position:center 35%"></div>
     </div>
   </section>
 
@@ -1269,6 +1444,15 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
 
 </main>
 
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lb-close">&times;</button>
+  <button class="lightbox-arrow prev" id="lb-prev">&#10094;</button>
+  <button class="lightbox-arrow next" id="lb-next">&#10095;</button>
+  <img class="lightbox-img" id="lb-img" src="" alt="">
+  <div class="lightbox-counter" id="lb-counter"></div>
+</div>
+
 <!-- Music -->
 <audio id="bg-music" src="Love%20Story.mp3" loop preload="auto"></audio>
 <button class="music-btn" id="music-btn" aria-label="Bật/Tắt nhạc">
@@ -1283,6 +1467,13 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
 (function () {
   /* ── Wedding date (change this) ── */
   var WEDDING = new Date('2026-11-14T09:00:00');
+
+  /* ── Side detection: ?side=qa = bride, default = groom ── */
+  var sideParam = new URLSearchParams(location.search).get('side');
+  if (sideParam && sideParam.toLowerCase() === 'qa') {
+    document.getElementById('party-groom').style.display = 'none';
+    document.getElementById('party-bride').style.display = '';
+  }
 
   /* ── Guest name from URL ── */
   var params = new URLSearchParams(location.search);
@@ -1306,6 +1497,7 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
     setTimeout(function () {
       cover.classList.add('opened');
       invitation.classList.add('visible');
+      document.getElementById('hero-section').classList.add('visible');
       document.body.style.overflow = '';
       /* ── Scroll reveal (init after cover opens) ── */
       var reveals = document.querySelectorAll('.reveal');
@@ -1629,6 +1821,138 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
       btn.disabled = false;
       btn.textContent = 'Gửi Lời Chúc';
     });
+  });
+})();
+
+/* ── Gallery interactive + Lightbox ── */
+(function () {
+  var cells = document.querySelectorAll('.gallery-cell');
+  var lbEl = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lb-img');
+  var lbCounter = document.getElementById('lb-counter');
+  var imgs = [];
+  var curIdx = 0;
+
+  cells.forEach(function (cell, i) {
+    var img = cell.querySelector('img');
+    if (img) imgs.push(img.src);
+
+    var shine = document.createElement('div');
+    shine.className = 'gal-shine';
+    cell.appendChild(shine);
+
+    function interact(ex, ey) {
+      var r = cell.getBoundingClientRect();
+      var px = (ex - r.left) / r.width;
+      var py = (ey - r.top) / r.height;
+      var x = px - 0.5;
+      var y = py - 0.5;
+      cell.style.transform = 'perspective(600px) rotateY(' + (x * 15) + 'deg) rotateX(' + (-y * 15) + 'deg) scale(1.04)';
+      shine.style.background = 'radial-gradient(circle at ' + (px * 100) + '% ' + (py * 100) + '%, rgba(212,188,138,0.25) 0%, transparent 60%)';
+      cell.classList.add('tilt-active');
+    }
+    function resetInteract() {
+      cell.style.transform = '';
+      cell.classList.remove('tilt-active');
+    }
+    function spawnRipple(ex, ey) {
+      var r = cell.getBoundingClientRect();
+      var rip = document.createElement('div');
+      rip.className = 'gal-ripple';
+      rip.style.left = (ex - r.left) + 'px';
+      rip.style.top = (ey - r.top) + 'px';
+      rip.style.animation = 'ripple-out .6s ease-out forwards';
+      cell.appendChild(rip);
+      setTimeout(function () { rip.remove(); }, 650);
+    }
+
+    cell.addEventListener('mousemove', function (e) { interact(e.clientX, e.clientY); });
+    cell.addEventListener('mouseleave', resetInteract);
+    cell.addEventListener('mousedown', function (e) { spawnRipple(e.clientX, e.clientY); });
+
+    var touchStart = { x: 0, y: 0, moved: false };
+    cell.addEventListener('touchstart', function (e) {
+      touchStart.x = e.touches[0].clientX;
+      touchStart.y = e.touches[0].clientY;
+      touchStart.moved = false;
+      interact(e.touches[0].clientX, e.touches[0].clientY);
+      spawnRipple(e.touches[0].clientX, e.touches[0].clientY);
+    }, { passive: true });
+    cell.addEventListener('touchmove', function (e) {
+      var dx = e.touches[0].clientX - touchStart.x;
+      var dy = e.touches[0].clientY - touchStart.y;
+      if (Math.abs(dx) > 8 || Math.abs(dy) > 8) touchStart.moved = true;
+      interact(e.touches[0].clientX, e.touches[0].clientY);
+    }, { passive: true });
+    cell.addEventListener('touchend', function () {
+      resetInteract();
+      if (!touchStart.moved) openLightbox(i);
+    });
+
+    cell.addEventListener('click', function () { openLightbox(i); });
+  });
+
+  /* Parallax scroll — images shift slightly opposite to scroll */
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var vh = window.innerHeight;
+      cells.forEach(function (cell) {
+        var r = cell.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > vh) return;
+        var center = (r.top + r.height / 2 - vh / 2) / vh;
+        var img = cell.querySelector('img');
+        if (img && !cell.classList.contains('tilt-active')) {
+          img.style.transform = 'scale(1.08) translateY(' + (center * -12) + 'px)';
+        }
+      });
+      ticking = false;
+    });
+  }, { passive: true });
+
+  function openLightbox(idx) {
+    curIdx = idx;
+    lbImg.src = imgs[idx];
+    lbCounter.textContent = (idx + 1) + ' / ' + imgs.length;
+    lbEl.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lbEl.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  function showImg(idx) {
+    curIdx = (idx + imgs.length) % imgs.length;
+    lbImg.style.opacity = '0';
+    setTimeout(function () {
+      lbImg.src = imgs[curIdx];
+      lbCounter.textContent = (curIdx + 1) + ' / ' + imgs.length;
+      lbImg.style.opacity = '1';
+    }, 150);
+  }
+
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('lb-prev').addEventListener('click', function () { showImg(curIdx - 1); });
+  document.getElementById('lb-next').addEventListener('click', function () { showImg(curIdx + 1); });
+  lbEl.addEventListener('click', function (e) { if (e.target === lbEl) closeLightbox(); });
+
+  var swipeX = 0;
+  lbEl.addEventListener('touchstart', function (e) { swipeX = e.touches[0].clientX; }, { passive: true });
+  lbEl.addEventListener('touchend', function (e) {
+    var dx = e.changedTouches[0].clientX - swipeX;
+    if (Math.abs(dx) > 50) {
+      if (dx < 0) showImg(curIdx + 1);
+      else showImg(curIdx - 1);
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (!lbEl.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showImg(curIdx - 1);
+    if (e.key === 'ArrowRight') showImg(curIdx + 1);
   });
 })();
 </script>
