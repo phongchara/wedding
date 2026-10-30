@@ -268,31 +268,19 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
   padding-block: .5rem;
 }
-.ornament::before, .ornament::after {
+.ornament::before {
   content: '';
-  width: 50px;
+  width: 100px;
   height: 1px;
   background: var(--gold);
   opacity: .35;
 }
-.ornament i {
-  width: 6px;
-  height: 6px;
-  background: var(--gold);
+.ornament::after { content: none; }
+.ornament i { display: none; }
+.paper-section .ornament::before {
   opacity: .5;
-  transform: rotate(45deg);
-  display: block;
-  flex-shrink: 0;
-}
-.paper-section .ornament::before,
-.paper-section .ornament::after {
-  opacity: .5;
-}
-.paper-section .ornament i {
-  opacity: .7;
 }
 
 /* ───── Decorative elements ───── */
@@ -835,17 +823,33 @@ section {
 
 /* ───── Story Timeline (paper) ───── */
 /* ───── Thank you ───── */
-.thankyou {
-  text-align: center;
-  padding-block: 3rem;
+.gallery-finale {
+  position: relative;
 }
-.thankyou p {
+.finale-overlay {
+  position: absolute;
+  top: 60%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  background: rgba(59, 10, 10, 0.7);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  padding: 1.6rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.finale-overlay p {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  color: var(--text);
+  font-size: 20px;
+  color: #fff;
   margin: 0;
   font-style: italic;
-  line-height: 1.8;
+  line-height: 1.7;
+  text-align: center;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
 
 /* ───── RSVP ───── */
@@ -1429,7 +1433,7 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
   <div class="hero-overlay">
     <p class="hero-label">Save the Date</p>
     <h1 class="hero-monogram"><span class="mono-a">A</span><span class="amp">&</span><span class="mono-p">P</span></h1>
-    <p class="hero-date">14 . 11 &mdash; 15 . 11 . 2026</p>
+
   </div>
 </section>
 <div class="hero-spacer"></div>
@@ -1542,15 +1546,14 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
       <div class="gallery-cell reveal" style="grid-column:2;grid-row:11/12"><img src="0M3A0592.jpg" alt="" loading="lazy" style="object-position:center 20%"></div>
       <!-- Row 12-14: wide panoramic closer -->
       <div class="gallery-cell reveal" style="grid-column:1/-1;grid-row:12/14"><img src="0M3A0598.jpg" alt="" loading="lazy" style="object-position:center 30%"></div>
-      <!-- Row 14-16: full width finale -->
-      <div class="gallery-cell reveal" style="grid-column:1/-1;grid-row:14/16"><img src="0M3A0788.jpg" alt="" loading="lazy" style="object-position:center 35%"></div>
+      <!-- Row 14-18: full width finale with thank-you overlay -->
+      <div class="gallery-cell gallery-finale reveal" style="grid-column:1/-1;grid-row:14/18">
+        <img src="0M3A0788.jpg" alt="" loading="lazy" style="object-position:center 35%">
+        <div class="finale-overlay">
+          <p>Sự hiện diện của quý khách là niềm vinh hạnh<br>cho gia đình chúng tôi!</p>
+        </div>
+      </div>
     </div>
-  </section>
-
-  <!-- Thank You -->
-  <section class="thankyou">
-    <div class="ornament reveal" aria-hidden="true"><i></i></div>
-    <p class="reveal">Sự hiện diện của quý khách là niềm vinh hạnh cho gia đình chúng tôi</p>
   </section>
 
   <!-- RSVP -->
