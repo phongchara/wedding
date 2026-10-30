@@ -28,20 +28,27 @@
   color-scheme: dark;
 }
 
+html, body {
+  overflow-x: hidden;
+}
 body {
+  background: #1a0505;
+  color: var(--text);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.8;
+  margin: 0;
+  padding: 0;
+}
+.page-shell {
+  max-width: 393px;
+  margin-inline: auto;
   background-color: var(--bg);
   background-image: url("bg-burgundy.jpeg");
   background-size: 100% auto;
   background-repeat: repeat-y;
   background-position: top center;
-  color: var(--text);
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 18px;
-  line-height: 1.8;
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
+  position: relative;
 }
 
 /* ───── Cover ───── */
@@ -237,8 +244,6 @@ body {
 
 /* ───── Main ───── */
 #invitation {
-  max-width: 720px;
-  margin-inline: auto;
   padding-inline: 24px;
   padding-block: 0 0;
   opacity: 0;
@@ -1480,6 +1485,7 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
 <!-- ═══════ Petals container ═══════ -->
 <div id="petals" aria-hidden="true"></div>
 
+<div class="page-shell">
 <!-- ═══════ Hero ═══════ -->
 <section class="hero" id="hero-section">
   <img class="hero-img" src="0M3A0510ap.jpg" alt="Quỳnh Anh & Đức Phong">
@@ -1669,6 +1675,7 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
   </footer>
 
 </main>
+</div><!-- .page-shell -->
 
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox">
