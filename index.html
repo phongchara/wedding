@@ -38,6 +38,7 @@ body {
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: 18px;
   line-height: 1.8;
+  overflow-x: hidden;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -343,6 +344,48 @@ section {
   height: 32px;
   background: var(--bg);
   margin-top: -1px;
+  position: relative;
+  overflow: visible;
+}
+.hero-flower {
+  position: absolute;
+  top: 50%;
+  right: -35px;
+  transform: translateY(-50%);
+  width: 100px;
+  height: auto;
+  z-index: 5;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+  opacity: 0;
+  transition: opacity .8s ease 2s;
+}
+.hero.visible ~ .hero-spacer .hero-flower {
+  opacity: 1;
+}
+.flower-decor {
+  position: absolute;
+  width: 100px;
+  height: auto;
+  z-index: 3;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));
+}
+.flower-decor-wrap {
+  position: relative;
+  height: 0;
+  overflow: visible;
+}
+.flower-left {
+  left: -45px;
+  top: -50px;
+}
+.flower-right {
+  right: -35px;
+  top: -50px;
+}
+.flower-lg {
+  width: 150px;
+  left: -60px;
 }
 .hero-img {
   width: 100%;
@@ -457,6 +500,16 @@ section {
   color: var(--text-dark);
   border: 1px solid rgba(212,188,138,0.35);
   box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+}
+.formal-flower {
+  position: absolute;
+  bottom: -85px;
+  right: -55px;
+  width: 140px;
+  height: auto;
+  z-index: 2;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));
+  pointer-events: none;
 }
 .formal-card::before {
   content: '';
@@ -1511,6 +1564,7 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
         </div>
 
       </div>
+      <img class="formal-flower" src="camellia.png" alt="">
     </div>
   </section>
 
@@ -1556,6 +1610,8 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
     </div>
   </section>
 
+  <div class="flower-decor-wrap"><img class="flower-decor flower-right reveal" src="nfdajifjaskdmjb2131k23n132.webp" alt=""></div>
+
   <!-- RSVP -->
   <section class="rsvp">
     <div class="rsvp-card reveal">
@@ -1581,6 +1637,8 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
       <div id="rsvp-status" class="rsvp-status"></div>
     </div>
   </section>
+
+  <div class="flower-decor-wrap"><img class="flower-decor flower-left flower-lg reveal" src="nfdajifjaskdmjb2131k23n132.webp" alt=""></div>
 
   <!-- Wishes -->
   <section class="wishes">
