@@ -848,6 +848,146 @@ section {
   line-height: 1.8;
 }
 
+/* ───── RSVP ───── */
+.rsvp { text-align: center; }
+.rsvp-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #3A2218;
+  margin: 0 0 .4rem;
+}
+.rsvp-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  color: #7A6A5E;
+  margin: 0 0 1.2rem;
+  line-height: 1.6;
+}
+.rsvp-card {
+  max-width: 380px;
+  margin: 0 auto;
+  background: #FAF6EF;
+  border-radius: 16px;
+  padding: 1.0rem 1.5rem 0.5rem;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+.rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
+}
+.rsvp-inner {
+  background: rgba(0,0,0,0.04);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+}
+.rsvp-form input[type="text"],
+.rsvp-form select {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  padding: 12px 14px;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text-dark);
+  outline: none;
+  transition: box-shadow .3s, border-color .3s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.rsvp-form input[type="text"]::placeholder { color: #aaa; }
+.rsvp-form input[type="text"]:focus,
+.rsvp-form select:focus { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(212,188,138,0.2); }
+.rsvp-form select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23999' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+.rsvp-field-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  color: #7A6A5E;
+  margin: 0 0 -.2rem;
+}
+.rsvp-radios {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+.rsvp-radio {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  cursor: pointer;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  color: #3A2218;
+}
+.rsvp-radio input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #bbb;
+  border-radius: 50%;
+  flex-shrink: 0;
+  padding: 0;
+  position: relative;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+.rsvp-radio input[type="radio"]:checked {
+  border-color: var(--gold);
+}
+.rsvp-radio input[type="radio"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+.rsvp-form button {
+  align-self: center;
+  background: #3A2218;
+  color: #FAF6EF;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  padding: 13px 50px;
+  cursor: pointer;
+  transition: opacity .3s;
+  margin-top: .3rem;
+}
+.rsvp-form button:hover { opacity: .85; }
+.rsvp-form button:disabled { opacity: .5; cursor: not-allowed; }
+.rsvp-status {
+  text-align: center;
+  padding: .8rem;
+  margin-top: .5rem;
+  border-radius: 4px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+}
+.rsvp-status.success { color: #4caf50; }
+.rsvp-status.error { color: #e57373; }
+.rsvp-status.success { color: #4caf50; }
+.rsvp-status.error { color: #e57373; }
+
 /* ───── Wishes ───── */
 .wishes { text-align: center; }
 .wishes h2 {
@@ -1413,15 +1553,40 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
     <p class="reveal">Sự hiện diện của quý khách là niềm vinh hạnh cho gia đình chúng tôi</p>
   </section>
 
+  <!-- RSVP -->
+  <section class="rsvp">
+    <div class="rsvp-card reveal">
+      <h2 class="rsvp-title">Xác Nhận Tham Dự</h2>
+      <p class="rsvp-desc">Việc xác nhận giúp gia đình chúng tôi chuẩn bị chu đáo hơn. Xin cảm ơn!</p>
+      <form class="rsvp-form" id="rsvp-form">
+        <div class="rsvp-inner">
+          <p class="rsvp-field-label">Số người tham dự</p>
+          <select id="rsvp-count">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <div class="rsvp-radios">
+            <label class="rsvp-radio"><input type="radio" name="rsvp-attend" value="yes" checked> Có, tôi sẽ tham dự</label>
+            <label class="rsvp-radio"><input type="radio" name="rsvp-attend" value="no"> Xin lỗi, tôi bận mất rồi!</label>
+          </div>
+        </div>
+        <button type="submit" id="rsvp-btn">Xác nhận</button>
+      </form>
+      <div id="rsvp-status" class="rsvp-status"></div>
+    </div>
+  </section>
+
   <!-- Wishes -->
   <section class="wishes">
     <h2 class="reveal">Sổ lưu bút</h2>
     <p class="reveal">Cảm ơn bạn rất nhiều vì đã gửi những lời chúc mừng tốt đẹp nhất đến đám cưới của chúng tôi!</p>
     <form id="wish-form" class="reveal">
-      <input type="text" id="w-name" placeholder="Nhập tên của bạn*" required maxlength="60">
       <textarea id="w-msg" placeholder="Nhập lời chúc của bạn*" required maxlength="500"></textarea>
       <input type="text" id="w-hp" class="wish-hp" tabindex="-1" autocomplete="off">
-      <button type="submit" id="wish-btn">Gửi lời chúc</button>
+      <button type="submit" id="wish-btn">Gửi Lời Chúc</button>
     </form>
     <div id="wish-status" class="wish-status"></div>
     <button class="wish-toggle reveal" id="wish-toggle">Xem lời chúc từ mọi người <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
@@ -1618,7 +1783,7 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
   }
 
   /* ── Wishes (Google Sheets backend) ── */
-  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyqE36MzH0D-mS3KXVEbE8uMEal3eWKiBht4ZcXgDliY1g9L-E7DKKXrNrq9qAQR4s9lQ/exec';
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyUPfg1-q6Xw7sLvgrcmcip7c23lawJA3zX38zrf1OLWrbig5IzwJKVdCS82G4XR51u0Q/exec';
   var RATE_KEY = 'wedding_wish_ts';
   var RATE_LIMIT_MS = 60000;
 
@@ -1784,6 +1949,37 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
     }
   });
 
+  /* ── RSVP form ── */
+  document.getElementById('rsvp-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = guest || 'Khách mời';
+    var count = document.getElementById('rsvp-count').value;
+    var attend = document.querySelector('input[name="rsvp-attend"]:checked').value;
+    var rBtn = document.getElementById('rsvp-btn');
+    var rStatus = document.getElementById('rsvp-status');
+    rBtn.disabled = true;
+    rBtn.textContent = 'Đang gửi...';
+    rStatus.textContent = '';
+    rStatus.className = 'rsvp-status';
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'rsvp', name: name, count: count, attend: attend })
+    }).then(function () {
+      rStatus.textContent = 'Cảm ơn bạn đã xác nhận!';
+      rStatus.className = 'rsvp-status success';
+    }).catch(function () {
+      rStatus.textContent = 'Không gửi được, vui lòng thử lại.';
+      rStatus.className = 'rsvp-status error';
+    }).finally(function () {
+      rBtn.disabled = false;
+      rBtn.textContent = 'Xác nhận';
+    });
+  });
+
+  /* ── Wish form ── */
   document.getElementById('wish-form').addEventListener('submit', function (e) {
     e.preventDefault();
     if (document.getElementById('w-hp').value) return;
@@ -1791,12 +1987,11 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
       showStatus('Bạn vừa gửi lời chúc rồi, vui lòng đợi một chút nhé!', 'error');
       return;
     }
-    var nameEl = document.getElementById('w-name');
     var msgEl = document.getElementById('w-msg');
     var btn = document.getElementById('wish-btn');
-    var n = nameEl.value.trim();
+    var n = guest || 'Khách mời';
     var m = msgEl.value.trim();
-    if (!n || !m) return;
+    if (!m) return;
 
     btn.disabled = true;
     btn.textContent = 'Đang gửi...';
@@ -1809,7 +2004,6 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
       body: JSON.stringify({ name: n, message: m })
     }).then(function () {
       markSent();
-      nameEl.value = '';
       msgEl.value = '';
       showStatus('Cảm ơn bạn đã gửi lời chúc! ♡', 'success');
       wishesLoaded = false;
