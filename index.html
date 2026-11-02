@@ -32,7 +32,7 @@ html, body {
   overflow-x: hidden;
 }
 body {
-  background: #1a0505;
+  background: var(--bg);
   color: var(--text);
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: 18px;
@@ -41,14 +41,15 @@ body {
   padding: 0;
 }
 .page-shell {
-  max-width: 393px;
+  width: 393px;
+  max-width: 100%;
   margin-inline: auto;
+  position: relative;
   background-color: var(--bg);
   background-image: url("bg-burgundy.jpeg");
   background-size: 100% auto;
   background-repeat: repeat-y;
   background-position: top center;
-  position: relative;
 }
 
 /* ───── Cover ───── */
@@ -219,7 +220,7 @@ body {
 }
 .cover-names {
   font-family: 'Great Vibes', cursive;
-  font-size: clamp(40px, 9vw, 58px);
+  font-size: 40px;
   font-weight: 400;
   margin: 0;
   line-height: 1.3;
@@ -423,7 +424,7 @@ section {
 }
 .hero-monogram {
   font-family: 'Great Vibes', cursive;
-  font-size: clamp(64px, 22vw, 120px);
+  font-size: 86px;
   font-weight: 700;
   color: #fff;
   margin: 0;
@@ -467,14 +468,14 @@ section {
 }
 .mono-letter {
   font-family: 'Great Vibes', cursive;
-  font-size: clamp(80px, 20vw, 120px);
+  font-size: 79px;
   color: var(--gold);
   line-height: 1;
 }
 .mono-amp {
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  font-size: clamp(28px, 6vw, 36px);
+  font-size: 24px;
   color: var(--rose);
   margin-inline: .5rem;
   vertical-align: middle;
@@ -564,7 +565,7 @@ section {
 }
 .formal-guest {
   font-family: 'Pinyon Script', cursive;
-  font-size: clamp(30px, 8vw, 42px);
+  font-size: 31px;
   font-weight: 400;
   color: #5A5A5A;
   margin: .1rem 0 0;
@@ -581,7 +582,7 @@ section {
 }
 .formal-couple {
   font-family: 'Pinyon Script', cursive;
-  font-size: clamp(50px, 12vw, 64px);
+  font-size: 47px;
   font-weight: 400;
   color: #3A3A3A;
   margin: 0 0 0rem;
@@ -628,7 +629,7 @@ section {
 }
 .formal-event-date {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(30px, 8vw, 42px);
+  font-size: 31px;
   font-weight: 700;
   color: var(--text-dark);
   margin: 0 0 0rem;
@@ -710,7 +711,7 @@ section {
 .countdown-grid {
   display: flex;
   justify-content: center;
-  gap: clamp(1rem, 4vw, 2.5rem);
+  gap: 1rem;
 }
 .cd-item {
   display: flex;
@@ -720,7 +721,7 @@ section {
 }
 .cd-num {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(32px, 8vw, 52px);
+  font-size: 31px;
   font-weight: 700;
   color: var(--gold);
   line-height: 1;
@@ -1054,7 +1055,7 @@ section {
 .wishes { text-align: center; }
 .wishes h2 {
   font-family: 'Alex Brush', cursive;
-  font-size: clamp(58px, 16vw, 78px);
+  font-size: 63px;
   font-weight: 500;
   color: var(--gold-light);
   margin: 0 0 -1rem;
@@ -1527,35 +1528,35 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
       <div class="formal-events">
         <div class="formal-event reveal">
           <span class="formal-event-badge">Lễ Ăn Hỏi</span>
-          <p class="formal-event-time">Vào lúc 8h00 ngày Thứ Bảy</p>
+          <p class="formal-event-time">Vào lúc 7h45 ngày Thứ Bảy</p>
           <p class="formal-event-date">14.11.2026</p>
           <p class="formal-event-lunar">(Nhằm ngày 06 tháng 10 năm Bính Ngọ)</p>
           <p class="formal-event-at">Tại</p>
           <p class="formal-event-venue">Tư gia nhà gái</p>
-          <p class="formal-event-address">Cầu Nhà Trường, Xóm 8, Quỳnh Tân, Quỳnh Văn, Nghệ An</p>
-          <a class="formal-event-map" href="https://www.google.com/maps/search/Quỳnh+Tân+Quỳnh+Văn+Nghệ+An" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg> Chỉ đường</a>
+          <p class="formal-event-address">Thôn 18, Xã Quỳnh Văn, Tỉnh Nghệ An<br>(Thôn 8, Quỳnh Tân cũ)</p>
+          <a class="formal-event-map" href="https://www.google.com/maps/search/Thôn+18+Xã+Quỳnh+Văn+Nghệ+An" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg> Chỉ đường</a>
         </div>
 
         <div class="formal-event reveal">
           <span class="formal-event-badge">Lễ Thành Hôn</span>
-          <p class="formal-event-time">Vào lúc 9h00 ngày Thứ Bảy</p>
+          <p class="formal-event-time">Vào lúc 10h00 ngày Thứ Bảy</p>
           <p class="formal-event-date">14.11.2026</p>
           <p class="formal-event-lunar">(Nhằm ngày 06 tháng 10 năm Bính Ngọ)</p>
           <p class="formal-event-at">Tại</p>
-          <p class="formal-event-venue">Tư gia nhà trai</p>
-          <p class="formal-event-address">Số nhà 72, Quỳnh Đôi, Quỳnh Anh, Nghệ An</p>
-          <a class="formal-event-map" href="https://www.google.com/maps/search/Quỳnh+Đôi+Quỳnh+Anh+Nghệ+An" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg> Chỉ đường</a>
+          <p class="formal-event-venue">Trung Tâm TDTT Quỳnh Đôi</p>
+          <p class="formal-event-address">Thôn 2 Quỳnh Đôi, Xã Quỳnh Anh, Tỉnh Nghệ An</p>
+          <a class="formal-event-map" href="https://www.google.com/maps/search/Trung+Tâm+TDTT+Quỳnh+Đôi+Xã+Quỳnh+Anh+Nghệ+An" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg> Chỉ đường</a>
         </div>
 
         <div class="formal-event reveal" id="party-groom">
           <span class="formal-event-badge">Tiệc Cưới</span>
-          <p class="formal-event-time">Vào lúc 10h30 ngày Thứ Bảy</p>
+          <p class="formal-event-time">Vào lúc 11h00 ngày Thứ Bảy</p>
           <p class="formal-event-date">14.11.2026</p>
           <p class="formal-event-lunar">(Nhằm ngày 06 tháng 10 năm Bính Ngọ)</p>
           <p class="formal-event-at">Tại</p>
-          <p class="formal-event-venue">Sân Đa Năng</p>
-          <p class="formal-event-address">Quỳnh Anh, Quỳnh Lưu, Nghệ An</p>
-          <a class="formal-event-map" href="https://www.google.com/maps/search/Sân+Đa+Năng+Quỳnh+Anh+Quỳnh+Lưu+Nghệ+An" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg> Chỉ đường</a>
+          <p class="formal-event-venue">Trung Tâm TDTT Quỳnh Đôi</p>
+          <p class="formal-event-address">Thôn 2 Quỳnh Đôi, Xã Quỳnh Anh, Tỉnh Nghệ An</p>
+          <a class="formal-event-map" href="https://www.google.com/maps/search/Trung+Tâm+TDTT+Quỳnh+Đôi+Xã+Quỳnh+Anh+Nghệ+An" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg> Chỉ đường</a>
         </div>
 
         <div class="formal-event reveal" id="party-bride" style="display:none">
@@ -1565,8 +1566,8 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
           <p class="formal-event-lunar">(Nhằm ngày 07 tháng 10 năm Bính Ngọ)</p>
           <p class="formal-event-at">Tại</p>
           <p class="formal-event-venue">Trường Tiểu Học Quỳnh Tân</p>
-          <p class="formal-event-address">Thôn 18, xã Quỳnh Văn, tỉnh Nghệ An<br>(thôn 8, Quỳnh Tân cũ)</p>
-          <a class="formal-event-map" href="https://www.google.com/maps/search/Trường+Tiểu+Học+Quỳnh+Tân+Quỳnh+Văn+Nghệ+An" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg> Chỉ đường</a>
+          <p class="formal-event-address">Thôn 18, Xã Quỳnh Văn, Tỉnh Nghệ An<br>(Thôn 8, Quỳnh Tân cũ)</p>
+          <a class="formal-event-map" href="https://www.google.com/maps/search/Thôn+18+Xã+Quỳnh+Văn+Nghệ+An" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg> Chỉ đường</a>
         </div>
 
       </div>
@@ -1592,22 +1593,19 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
     <div class="gallery-grid">
       <!-- Row 1-3: big left + small right -->
       <div class="gallery-cell reveal" style="grid-column:1;grid-row:1/4"><img src="0M3A0288.jpg" alt="" loading="lazy" style="object-position:center 25%"></div>
-      <div class="gallery-cell reveal" style="grid-column:2;grid-row:1/3"><img src="0M3A0320.jpg" alt="" loading="lazy" style="object-position:center 20%"></div>
-      <div class="gallery-cell reveal" style="grid-column:2;grid-row:3/4"><img src="0M3A0361.jpg" alt="" loading="lazy" style="object-position:center 15%"></div>
-      <!-- Row 4-6: wide panoramic -->
+      <div class="gallery-cell reveal" style="grid-column:2;grid-row:1/2"><img src="0M3A0463.jpg" alt="" loading="lazy" style="object-position:center 20%"></div>
+      <div class="gallery-cell reveal" style="grid-column:2;grid-row:2/4"><img src="0M3A0306.jpg" alt="" loading="lazy" style="object-position:center 25%"></div>
+      <!-- Row 4-5: wide panoramic -->
       <div class="gallery-cell reveal" style="grid-column:1/-1;grid-row:4/6"><img src="0M3A0491.jpg" alt="" loading="lazy" style="object-position:center 28%"></div>
-      <!-- Row 6-9: big left + small right (zigzag) -->
-      <div class="gallery-cell reveal" style="grid-column:1;grid-row:6/9"><img src="0M3A0435.jpg" alt="" loading="lazy" style="object-position:center 30%"></div>
-      <div class="gallery-cell reveal" style="grid-column:2;grid-row:6/7"><img src="0M3A0200.jpg" alt="" loading="lazy" style="object-position:center 25%"></div>
-      <div class="gallery-cell reveal" style="grid-column:2;grid-row:7/9"><img src="0M3A0540.jpg" alt="" loading="lazy" style="object-position:center 20%"></div>
-      <!-- Row 9-12: big left + small right -->
-      <div class="gallery-cell reveal" style="grid-column:1;grid-row:9/12"><img src="0M3A0561.jpg" alt="" loading="lazy" style="object-position:center 15%"></div>
-      <div class="gallery-cell reveal" style="grid-column:2;grid-row:9/11"><img src="0M3A0548.jpg" alt="" loading="lazy" style="object-position:center 10%"></div>
-      <div class="gallery-cell reveal" style="grid-column:2;grid-row:11/12"><img src="0M3A0592.jpg" alt="" loading="lazy" style="object-position:center 20%"></div>
-      <!-- Row 12-14: wide panoramic closer -->
-      <div class="gallery-cell reveal" style="grid-column:1/-1;grid-row:12/14"><img src="0M3A0598.jpg" alt="" loading="lazy" style="object-position:center 30%"></div>
-      <!-- Row 14-18: full width finale with thank-you overlay -->
-      <div class="gallery-cell gallery-finale reveal" style="grid-column:1/-1;grid-row:14/18">
+      <!-- Row 6-9: small left + big right (zigzag) -->
+      <div class="gallery-cell reveal" style="grid-column:1;grid-row:6/8"><img src="0M3A0200.jpg" alt="" loading="lazy" style="object-position:center 25%"></div>
+      <div class="gallery-cell reveal" style="grid-column:1;grid-row:8/10"><img src="0M3A0411.jpg" alt="" loading="lazy" style="object-position:center 30%"></div>
+      <div class="gallery-cell reveal" style="grid-column:2;grid-row:6/10"><img src="0M3A0543.jpg" alt="" loading="lazy" style="object-position:center 20%"></div>
+      <!-- Row 10-12: pair -->
+      <div class="gallery-cell reveal" style="grid-column:1;grid-row:10/12"><img src="0M3A0548.jpg" alt="" loading="lazy" style="object-position:center 10%"></div>
+      <div class="gallery-cell reveal" style="grid-column:2;grid-row:10/12"><img src="0M3A0592.jpg" alt="" loading="lazy" style="object-position:center 20%"></div>
+      <!-- Row 12-16: full width finale with thank-you overlay -->
+      <div class="gallery-cell gallery-finale reveal" style="grid-column:1/-1;grid-row:12/16">
         <img src="0M3A0788.jpg" alt="" loading="lazy" style="object-position:center 35%">
         <div class="finale-overlay">
           <p>Sự hiện diện của quý khách là niềm vinh hạnh<br>cho gia đình chúng tôi!</p>
