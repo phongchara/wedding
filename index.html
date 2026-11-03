@@ -40,7 +40,7 @@
   color-scheme: dark;
 }
 
-html, body {
+html {
   overflow-x: hidden;
 }
 body {
@@ -1786,7 +1786,7 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
       cover.classList.add('opened');
       invitation.classList.add('visible');
       document.getElementById('hero-section').classList.add('visible');
-      document.body.style.overflow = '';
+      document.body.style.overflowY = '';
       /* ── Scroll reveal (init after cover opens) ── */
       var reveals = document.querySelectorAll('.reveal');
       if ('IntersectionObserver' in window) {
@@ -1857,7 +1857,7 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
       musicBtn.classList.remove('playing');
     }
   });
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflowY = 'hidden';
 
   /* ── Countdown ── */
   var dEl = document.getElementById('cd-d');
@@ -2235,11 +2235,11 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
     lbImg.src = imgs[idx];
     lbCounter.textContent = (idx + 1) + ' / ' + imgs.length;
     lbEl.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflowY = 'hidden';
   }
   function closeLightbox() {
     lbEl.classList.remove('active');
-    document.body.style.overflow = '';
+    document.body.style.overflowY = '';
   }
   function showImg(idx) {
     curIdx = (idx + imgs.length) % imgs.length;
