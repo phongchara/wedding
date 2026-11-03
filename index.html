@@ -431,6 +431,9 @@ section {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
+.hero-label-bottom {
+  margin-top: -0.5rem !important;
+}
 .hero-monogram {
   font-family: 'Great Vibes', cursive;
   font-size: 86px;
@@ -700,17 +703,19 @@ section {
 /* ───── Countdown ───── */
 .countdown-section {
   text-align: center;
+  padding-bottom: 1rem;
 }
 .countdown-quote {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 15px;
-  font-weight: 400;
-  letter-spacing: 1.0px;
+  font-size: 13px;
+  font-weight: 500;
+  font-style: normal;
   text-transform: uppercase;
+  letter-spacing: 1.5px;
   color: var(--gold);
-  margin: 1.2rem 0 0;
+  margin: 1.2rem auto 0;
   opacity: .8;
-  white-space: nowrap;
+  text-align: center;
   animation: quote-beat 3s ease-in-out infinite;
 }
 @keyframes quote-beat {
@@ -749,6 +754,7 @@ section {
   position: relative;
   overflow: hidden;
   margin-inline: -22px;
+  padding-top: 1rem;
 }
 .gallery h2 {
   font-family: 'Alex Brush', cursive;
@@ -890,38 +896,52 @@ section {
 }
 
 /* ───── Story Timeline (paper) ───── */
-/* ───── Thank you ───── */
+/* ───── Finale photo + thank you ───── */
 .gallery-finale {
   position: relative;
+  margin-inline: -24px;
+  overflow: hidden;
+  pointer-events: none;
+}
+.gallery-finale img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  min-height: 420px;
 }
 .finale-overlay {
   position: absolute;
-  top: 60%;
+  bottom: 90px;
   left: 0;
   right: 0;
-  transform: translateY(-50%);
   background: rgba(59, 10, 10, 0.7);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
-  padding: 1.6rem 1rem;
+  padding: 1.5rem 1.2rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 .finale-overlay p {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 20px;
+  font-size: 16px;
   color: #fff;
-  margin: 0;
+  margin: 0 0 0.6rem;
   font-style: italic;
   line-height: 1.7;
   text-align: center;
   letter-spacing: 0.5px;
   text-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
+.finale-overlay p:last-child { margin-bottom: 0; }
+.finale-sign {
+  font-weight: 600;
+  margin-top: 0.3rem !important;
+}
 
 /* ───── RSVP ───── */
-.rsvp { text-align: center; }
+.rsvp { text-align: center; padding-bottom: 1.5rem; }
 .rsvp-title {
   font-family: 'Playfair Display', serif;
   font-size: 22px;
@@ -1061,7 +1081,7 @@ section {
 .rsvp-status.error { color: #e57373; }
 
 /* ───── Wishes ───── */
-.wishes { text-align: center; }
+.wishes { text-align: center; padding-top: 1.5rem; padding-bottom: 1.5rem; }
 .wishes h2 {
   font-family: 'Alex Brush', cursive;
   font-size: 63px;
@@ -1311,23 +1331,23 @@ section {
   line-height: 1.7;
 }
 .thankyou-sign {
-  font-size: 18px !important;
+  font-size: 16px !important;
   font-weight: 600;
-  font-style: normal !important;
+  font-style: italic !important;
   margin-top: 0.5rem !important;
 }
 
 /* ───── Footer ───── */
 footer {
   text-align: center;
-  padding-block: 1rem 2.5rem;
+  padding-block: 0 0.5rem;
 }
 footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
 .footer-names {
   font-family: 'Great Vibes', cursive;
   font-size: 36px !important;
   color: var(--gold) !important;
-  margin-top: 1rem !important;
+  margin-top: 0 !important;
 }
 .footer-tag {
   font-size: 13px !important;
@@ -1522,6 +1542,7 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
   <div class="hero-overlay">
     <p class="hero-label">Save the Date</p>
     <h1 class="hero-monogram"><span class="mono-a">A</span><span class="amp">&</span><span class="mono-p">P</span></h1>
+    <p class="hero-label hero-label-bottom">We're Getting Married</p>
 
   </div>
 </section>
@@ -1633,13 +1654,6 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
       <!-- Row 10-12: pair -->
       <div class="gallery-cell reveal" style="grid-column:1;grid-row:10/12"><img src="0M3A0548.jpg" alt="" loading="lazy" style="object-position:center 10%"></div>
       <div class="gallery-cell reveal" style="grid-column:2;grid-row:10/12"><img src="0M3A0592.jpg" alt="" loading="lazy" style="object-position:center 20%"></div>
-      <!-- Row 12-16: full width finale with thank-you overlay -->
-      <div class="gallery-cell gallery-finale reveal" style="grid-column:1/-1;grid-row:12/16">
-        <img src="0M3A0788.jpg" alt="" loading="lazy" style="object-position:center 35%">
-        <div class="finale-overlay">
-          <p>Sự hiện diện của quý khách là niềm vinh hạnh<br>cho gia đình chúng tôi!</p>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -1694,16 +1708,18 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
     </div>
   </section>
 
-  <!-- Thank You Message -->
-  <section class="thankyou">
-    <p class="reveal">Trong đời, có những khoảnh khắc chỉ thật trọn vẹn ý nghĩa khi được sẻ chia cùng những người trân quý!</p>
-    <p class="reveal">Sự hiện diện cùng nụ cười và lời chúc phúc của mọi người, là niềm hạnh phúc lớn nhất của Gia đình chúng tôi trong ngày trọng đại này!</p>
-    <p class="reveal thankyou-sign">Trân Trọng và Cảm Ơn! ❤️</p>
+  <!-- Finale photo with thank-you overlay -->
+  <section class="gallery-finale reveal">
+    <img src="0M3A0788.jpg" alt="" loading="lazy" style="object-position:center 35%">
+    <div class="finale-overlay">
+      <p>Trong đời, có những khoảnh khắc chỉ thật trọn vẹn ý nghĩa khi được sẻ chia cùng những người trân quý!</p>
+      <p>Sự hiện diện cùng nụ cười và lời chúc phúc của mọi người, là niềm hạnh phúc lớn nhất của Gia đình chúng tôi trong ngày trọng đại này!</p>
+      <p class="finale-sign">Trân Trọng và Cảm Ơn! ❤️</p>
+    </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <div class="ornament reveal" aria-hidden="true"><i></i></div>
     <p class="footer-names reveal">Quỳnh Anh & Đức Phong</p>
     <p class="footer-tag reveal">#QuAnhPhong2026</p>
   </footer>
