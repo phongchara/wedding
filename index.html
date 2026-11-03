@@ -1754,19 +1754,21 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
   /* ── Wedding date (change this) ── */
   var WEDDING = new Date('2026-11-14T09:00:00');
 
-  /* ── Side detection: ?side=qa = bride, default = groom ── */
-  var sideParam = new URLSearchParams(location.search).get('side');
+  /* ── Parse params from hash (#to=Name&side=qa) or query string ── */
+  var hashStr = location.hash.length > 1 ? location.hash.slice(1) : '';
+  var hp = new URLSearchParams(hashStr);
+  var qp = new URLSearchParams(location.search);
+  function getParam(key) { return hp.get(key) || qp.get(key); }
+
+  /* ── Side detection: side=qa = bride, default = groom ── */
+  var sideParam = getParam('side');
   if (sideParam && sideParam.toLowerCase() === 'qa') {
     document.getElementById('party-groom').style.display = 'none';
     document.getElementById('party-bride').style.display = '';
   }
 
   /* ── Guest name from URL ── */
-  var params = new URLSearchParams(location.search);
-  var guest = params.get('to');
-  if (!guest && location.hash.length > 1) {
-    guest = decodeURIComponent(location.hash.slice(1)).replace(/[-_]/g, ' ');
-  }
+  var guest = getParam('to');
   if (guest) {
     document.getElementById('guest-name').textContent = guest;
   }
