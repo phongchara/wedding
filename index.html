@@ -516,7 +516,7 @@ section {
   max-width: 540px;
   margin: 0 auto;
   background: rgba(255,252,245,0.96);
-  padding: 2.5rem 1.8rem;
+  padding: 2.5rem 1.2rem;
   text-align: center;
   color: var(--text-dark);
   border: 1px solid rgba(212,188,138,0.35);
@@ -915,32 +915,35 @@ section {
 }
 .finale-overlay {
   position: absolute;
-  bottom: 90px;
+  bottom: 120px;
   left: 0;
   right: 0;
   background: rgba(59, 10, 10, 0.7);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
-  padding: 1.5rem 1.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0.6rem 0.8rem 1rem;
+}
+.finale-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 36px;
+  font-weight: 400;
+  color: #fff;
+  margin: 0 0 0.2rem;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 .finale-overlay p {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 16px;
+  font-size: 13px;
   color: #fff;
-  margin: 0 0 0.6rem;
-  font-style: italic;
-  line-height: 1.7;
+  margin: 0;
+  line-height: 1.8;
   text-align: center;
-  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
   text-shadow: 0 1px 4px rgba(0,0,0,0.3);
-}
-.finale-overlay p:last-child { margin-bottom: 0; }
-.finale-sign {
-  font-weight: 600;
-  margin-top: 0.3rem !important;
 }
 
 /* ───── RSVP ───── */
@@ -1084,7 +1087,7 @@ section {
 .rsvp-status.error { color: #e57373; }
 
 /* ───── Wishes ───── */
-.wishes { text-align: center; padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.wishes { text-align: center; padding-top: 1.5rem; padding-bottom: 1.5rem; margin-inline: -8px; }
 .wishes h2 {
   font-family: 'Alex Brush', cursive;
   font-size: 63px;
@@ -1094,7 +1097,8 @@ section {
 }
 .wishes > p {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
+  font-size: 17px;
+  padding-inline: 0;
   color: var(--text-muted);
   margin: 0 0 1.2rem;
   line-height: 1.7;
@@ -1693,7 +1697,7 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
   <!-- Wishes -->
   <section class="wishes">
     <h2 class="reveal">Sổ lưu bút</h2>
-    <p class="reveal">Cảm ơn bạn rất nhiều vì đã gửi những lời chúc mừng tốt đẹp nhất đến đám cưới của chúng tôi!</p>
+    <p class="reveal">Cảm ơn bạn rất nhiều vì đã gửi những lời chúc&nbsp;mừng tốt đẹp nhất đến đám cưới của chúng&nbsp;tôi!</p>
     <form id="wish-form" class="reveal">
       <textarea id="w-msg" placeholder="Nhập lời chúc của bạn*" required maxlength="500"></textarea>
       <input type="text" id="w-hp" class="wish-hp" tabindex="-1" autocomplete="off">
@@ -1715,9 +1719,8 @@ footer p { margin: 0; color: var(--text-muted); font-size: 16px; }
   <section class="gallery-finale reveal">
     <img src="0M3A0788.jpg" alt="" loading="lazy" style="object-position:center 35%">
     <div class="finale-overlay">
-      <p>Trong đời, có những khoảnh khắc chỉ thật trọn vẹn ý nghĩa khi được sẻ chia cùng những người trân quý!</p>
-      <p>Sự hiện diện cùng nụ cười và lời chúc phúc của mọi người, là niềm hạnh phúc lớn nhất của Gia đình chúng tôi trong ngày trọng đại này!</p>
-      <p class="finale-sign">Trân Trọng và Cảm Ơn! ❤️</p>
+      <h3 class="finale-title">Lời cảm ơn</h3>
+      <p>Cảm ơn quý khách đã dành tình cảm và những lời chúc tốt đẹp cho gia đình chúng tôi. Mỗi sự yêu thương và sẻ chia đều là món quà quý giá, góp phần làm cho hành trình hạnh phúc thêm ý nghĩa và đáng nhớ.</p>
     </div>
   </section>
 
